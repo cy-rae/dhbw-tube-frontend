@@ -5,21 +5,25 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="showNavigationDrawer = !showNavigationDrawer" />
 
-        <q-toolbar-title class="row" style="max-height: 100px">
-          <div class="col q-my-auto q-pl-lg text-h3">
+        <q-toolbar-title class="row max-toolbar-height">
+          <div class="col text-bold q-my-auto q-pl-lg text-h3">
             {{ $t('app.title') }}
           </div>
           <div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/DHBW_CAS_Logo.png" style="max-height: 100px">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7f/DHBW_CAS_Logo.png"
+              :alt="$t('app.institution')"
+              class="max-toolbar-height"
+            >
           </div>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <navigation-drawer v-model:show-navigation-drawer="showNavigationDrawer" />
+    <navigation-drawer class="text-h6" v-model:show-navigation-drawer="showNavigationDrawer" />
 
     <q-page-container>
-      <router-view />
+      <router-view class="bg-grey-2" />
     </q-page-container>
 
   </q-layout>

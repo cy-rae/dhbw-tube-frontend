@@ -1,6 +1,6 @@
 {
   "app.title": "DHBW Tube",
 
-  "nav.home": "Home",
-  "nav.upload": "Upload video"
+  "nav.stream": "Stream",
+  "nav.upload": "Upload"
 }

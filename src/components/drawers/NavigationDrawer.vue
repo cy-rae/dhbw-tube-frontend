@@ -3,21 +3,21 @@
 
     <q-scroll-area class="fit">
       <q-list padding class="menu-list">
-        <q-item clickable v-ripple>
+        <q-item @click="onNavigationClick(RoutePaths.STREAMING_PAGE)" clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
           <q-item-section>
-            {{ $t("nav.home") }}
+            {{ $t('nav.stream') }}
           </q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple>
+        <q-item @click="onNavigationClick(RoutePaths.UPLOAD_PAGE)" clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="file_upload" />
           </q-item-section>
           <q-item-section>
-            {{ $t("nav.upload") }}
+            {{ $t('nav.upload') }}
           </q-item-section>
         </q-item>
       </q-list>
@@ -27,15 +27,27 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
+import { RoutePaths } from 'src/enums/RoutePaths';
 
+// Init helpers
+const router = useRouter();
+
+// Init props
 interface Props {
   showNavigationDrawer: boolean;
 }
+
 const props = defineProps<Props>();
 
+// Init local variables
 const showDrawer = ref(props.showNavigationDrawer);
 
 watch(() => props.showNavigationDrawer, (newValue: boolean) =>
-  showDrawer.value = newValue)
-;
+  showDrawer.value = newValue
+);
+
+function onNavigationClick(path: string): void {
+  router.push(path);
+}
 </script>
