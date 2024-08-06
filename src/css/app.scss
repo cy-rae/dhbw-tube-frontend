@@ -1,2 +1,9 @@
 // app global css in SCSS form
 @import './sizes.scss';
+@import './bg.scss';
+@import './page-styles.scss';
+
+body {
+  position: fixed;
+  overscroll-behavior: none;
+}

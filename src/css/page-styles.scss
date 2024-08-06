@@ -1,0 +1,14 @@
+/**
+ * Darken page background.
+ */
+.q-page {
+  margin: 10vh 10vw;
+  border-radius: 25px;
+
+  /* top, transparent black, faked with gradient */
+  background:
+    linear-gradient(
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.3)
+    );
+}

@@ -1,5 +1,6 @@
 {
   "app.title": "DHBW Tube",
+  "app.institution": "DHBW CAS",
 
   "nav.stream": "Stream",
   "nav.upload": "Upload"
