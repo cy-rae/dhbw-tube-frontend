@@ -1,6 +1,6 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <q-card class="row items-center justify-evenly">
+    <q-card class="row items-center justify-evenly" style="height: calc(80vh - var(--header-height))">
       <q-scroll-area style="width: 100%; height: 100%">
         <div class="q-mx-auto" style="width: 80%">
           <q-video

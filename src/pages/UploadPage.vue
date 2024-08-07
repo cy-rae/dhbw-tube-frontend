@@ -1,40 +1,57 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    <q-card class="row items-center justify-evenly">
-      <q-scroll-area style="width: 100%; height: calc(100% - var(--card-actions-height))">
+    <q-card>
+      <q-card-section class="q-pa-none">
         <q-form class="q-gutter-md">
-          <q-input
-            v-model="title"
-            :placeholder="$t('upload.placeholder.title')"
-            required standout
-          />
+          <div class="row q-col-gutter-md">
+            <div class="col">
+              <q-input
+                v-model="title"
+                :placeholder="$t('upload.placeholder.title')"
+                required standout
+              />
+            </div>
 
-          <q-input
-            v-model="username"
-            :placeholder="$t('upload.placeholder.username')"
-            required standout
-          />
+            <div class="col">
+              <q-file
+                v-model="file"
+                :label="$t('upload.placeholder.file')"
+                standout
+              >
+                <template v-slot:prepend>
+                  <q-icon name="attach_file" />
+                </template>
+              </q-file>
+            </div>
+          </div>
 
-          <q-file
-            v-model="file"
-            :label="$t('upload.placeholder.file')"
-            standout
-          >
-            <template v-slot:prepend>
-              <q-icon name="attach_file" />
-            </template>
-          </q-file>
+          <div class="row q-col-gutter-md q-pt-md">
+            <div class="col-3" />
+            <div class="col-6">
+              <q-input
+                v-model="username"
+                :placeholder="$t('upload.placeholder.username')"
+                required standout
+              />
+            </div>
+            <div class="col-3" />
+          </div>
+
         </q-form>
-      </q-scroll-area>
+      </q-card-section>
 
-      <q-card-actions>
+      <q-separator class="q-my-md" />
+
+      <q-card-actions align="center" class="q-pa-none">
         <q-btn
           :label="$t('upload.label.reset')"
+          @click="onReset"
           color="grey-5" no-caps text-color="black" unelevated
         />
 
         <q-btn
           :label="$t('upload.label.upload')"
+          @click="onUpload"
           color="primary" no-caps unelevated
         />
       </q-card-actions>
@@ -46,6 +63,14 @@
 import { Ref, ref } from 'vue';
 
 const title = ref('');
-const username = ref('');
 const file: Ref<File | null | undefined> = ref(null);
+const username = ref('');
+
+function onReset(): void {
+
+}
+
+function onUpload(): void {
+
+}
 </script>
