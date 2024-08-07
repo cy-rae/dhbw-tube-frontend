@@ -8,8 +8,11 @@
             src="https://www.youtube.com/embed/k3_tw44QsZQ?rel=0"
           />
 
+          <div class="text-h5 q-pt-sm">{{ title }}</div>
+          <div class="text-bold">{{ $t('stream.by')}} {{ username }}</div>
         </div>
 
+        <div class="text-h5 q-pt-sm">{{ $t('stream.comments')}}</div>
         <div v-for="n in 100" :key="n" class="q-py-xs">
           Lorem ipsum dolor sit amet, consectetur adipisicing
           elit, sed do eiusmod tempor incididunt ut labore et
@@ -21,4 +24,9 @@
 </template>
 
 <script setup lang="ts">
+
+import { ref } from 'vue';
+
+const title = ref('Cool coala can carate');
+const username = ref('coala-carate');
 </script>

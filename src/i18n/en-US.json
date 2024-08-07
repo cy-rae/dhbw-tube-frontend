@@ -9,6 +9,9 @@
 
   "search.title": "Search",
 
+  "stream.comments": "Comments",
+  "stream.by": "by",
+
   "upload.title": "Video-Upload",
   "upload.placeholder.title": "Video title",
   "upload.placeholder.username": "Username",
