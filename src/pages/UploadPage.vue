@@ -8,18 +8,34 @@
       <q-card-section class="q-pa-none">
         <q-form ref="uploadFormRef" class="q-gutter-md">
           <div class="row q-col-gutter-md">
+            <!-- TITLE -->
             <div class="col">
               <q-input
                 v-model="title"
                 :placeholder="$t('upload.placeholder.title')"
+                :rules="[() => ruleService.isSet(title)]"
                 required standout
               />
             </div>
 
+            <!-- USERNAME -->
+            <div class="col">
+              <q-input
+                v-model="username"
+                :placeholder="$t('upload.placeholder.username')"
+                :rules="[() => ruleService.isSet(username)]"
+                required standout
+              />
+            </div>
+          </div>
+
+          <div class="row q-col-gutter-md q-pt-md">
+            <!-- VIDEO -->
             <div class="col">
               <q-file
-                v-model="file"
+                v-model="video"
                 :label="$t('upload.placeholder.file')"
+                :rules="[() => ruleService.isSet(video)]"
                 standout
               >
                 <template v-slot:prepend>
@@ -27,18 +43,20 @@
                 </template>
               </q-file>
             </div>
-          </div>
 
-          <div class="row q-col-gutter-md q-pt-md">
-            <div class="col-3" />
-            <div class="col-6">
-              <q-input
-                v-model="username"
-                :placeholder="$t('upload.placeholder.username')"
-                required standout
-              />
+            <!-- COVER -->
+            <div class="col">
+              <q-file
+                v-model="cover"
+                :label="$t('upload.placeholder.cover')"
+                :rules="[() => ruleService.isSet(cover)]"
+                standout
+              >
+                <template v-slot:prepend>
+                  <q-icon name="attach_file" />
+                </template>
+              </q-file>
             </div>
-            <div class="col-3" />
           </div>
 
         </q-form>
@@ -67,24 +85,33 @@
 import { Ref, ref } from 'vue';
 import { UploadDTO } from 'src/dtos/UploadDTO';
 import { QForm } from 'quasar';
+import { RuleService } from 'src/services/RuleService';
 
+// Helpers
+const ruleService = new RuleService();
+
+// References
 const uploadFormRef: Ref<InstanceType<typeof QForm> | null> = ref(null);
+
+// Models
 const title = ref('');
-const file: Ref<File | null | undefined> = ref(null);
 const username = ref('');
+const video: Ref<File | null | undefined> = ref(null);
+const cover: Ref<File | null | undefined> = ref(null);
 
 function onReset(): void {
   title.value = '';
-  file.value = null;
   username.value = '';
+  video.value = null;
+  cover.value = null;
 }
 
 function onUpload(): void {
-  if(!uploadFormRef.value?.validate() || !file.value){
-    return
+  if (!uploadFormRef.value?.validate() || !video.value || !cover.value) {
+    return;
   }
 
-  const uploadDTO = new UploadDTO(title.value, file.value, username.value);
+  const uploadDTO = new UploadDTO(title.value, username.value, video.value, cover.value);
   console.log(uploadDTO); // TODO: Send to API
 }
 </script>

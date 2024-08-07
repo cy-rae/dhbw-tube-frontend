@@ -11,6 +11,9 @@
   "upload.placeholder.title": "Video title",
   "upload.placeholder.username": "Username",
   "upload.placeholder.file": "Video file",
+  "upload.placeholder.cover": "Cover image",
   "upload.label.upload": "Upload",
-  "upload.label.reset": "Reset"
+  "upload.label.reset": "Reset",
+
+  "rule.empty-field": "Please fill in this field."
 }

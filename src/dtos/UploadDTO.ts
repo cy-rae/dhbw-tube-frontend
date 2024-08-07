@@ -1,11 +1,13 @@
 export class UploadDTO{
   title: string;
-  file: File;
   username: string;
+  video: File;
+  cover: File;
 
-  constructor(title: string, file: File, username: string) {
+  constructor(title: string, username: string, video: File, cover: File) {
     this.title = title;
-    this.file = file;
     this.username = username;
+    this.video = video;
+    this.cover = cover;
   }
 }
