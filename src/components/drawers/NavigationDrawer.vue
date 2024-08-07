@@ -3,7 +3,7 @@
 
     <q-scroll-area class="fit">
       <q-list padding class="menu-list">
-        <q-item @click="onNavigationClick(RoutePaths.STREAMING_PAGE)" clickable v-ripple>
+        <q-item @click="onNavigationClick(RoutePaths.SEARCH_PAGE)" clickable v-ripple>
           <q-item-section avatar>
             <q-icon name="home" />
           </q-item-section>
