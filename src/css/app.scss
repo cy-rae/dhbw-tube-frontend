@@ -1,9 +1,12 @@
 // app global css in SCSS form
-@import './sizes.scss';
+@import './variables.scss';
 @import './bg.scss';
-@import './page-styles.scss';
+@import 'components/card';
+@import 'components/field';
+@import 'components/toolbar';
+@import 'components/button';
 
-body {
+html {
   position: fixed;
   overscroll-behavior: none;
 }

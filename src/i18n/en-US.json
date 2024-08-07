@@ -1,7 +1,15 @@
 {
   "app.title": "DHBW Tube",
+  "app.title-1": "DH",
+  "app.title-2": "BW Tube",
   "app.institution": "DHBW CAS",
 
   "nav.stream": "Stream",
-  "nav.upload": "Upload"
+  "nav.upload": "Upload",
+
+  "upload.placeholder.title": "Video title",
+  "upload.placeholder.username": "Username",
+  "upload.placeholder.file": "Video file",
+  "upload.label.upload": "Upload",
+  "upload.label.reset": "Reset"
 }
