@@ -7,6 +7,7 @@
   "nav.stream": "Stream",
   "nav.upload": "Upload",
 
+  "upload.title": "Video-Upload",
   "upload.placeholder.title": "Videotitel",
   "upload.placeholder.username": "Username",
   "upload.placeholder.file": "Videodatei",

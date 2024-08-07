@@ -7,6 +7,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
+        path: RoutePaths.SEARCH_PAGE,
+        component: () => import('pages/SearchPage.vue')
+      },
+      {
         path: RoutePaths.STREAMING_PAGE,
         component: () => import('pages/StreamingPage.vue')
       },

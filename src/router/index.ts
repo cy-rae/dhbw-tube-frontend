@@ -35,7 +35,7 @@ export default route(function(/* { store, ssrContext } */) {
 
   router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalizedLoaded, next: NavigationGuardNext) => {
     if (to.fullPath === RoutePaths.MAIN) {
-      await router.push(RoutePaths.STREAMING_PAGE);
+      await router.push(RoutePaths.SEARCH_PAGE);
     }
     next();
   });

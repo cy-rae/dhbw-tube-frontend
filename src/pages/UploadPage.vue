@@ -1,8 +1,12 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <q-card>
+      <q-card-section class="q-pa-none q-pb-md text-h5">
+        {{ $t('upload.title') }}
+      </q-card-section>
+
       <q-card-section class="q-pa-none">
-        <q-form class="q-gutter-md">
+        <q-form ref="uploadFormRef" class="q-gutter-md">
           <div class="row q-col-gutter-md">
             <div class="col">
               <q-input
@@ -61,16 +65,26 @@
 
 <script setup lang="ts">
 import { Ref, ref } from 'vue';
+import { UploadDTO } from 'src/dtos/UploadDTO';
+import { QForm } from 'quasar';
 
+const uploadFormRef: Ref<InstanceType<typeof QForm> | null> = ref(null);
 const title = ref('');
 const file: Ref<File | null | undefined> = ref(null);
 const username = ref('');
 
 function onReset(): void {
-
+  title.value = '';
+  file.value = null;
+  username.value = '';
 }
 
 function onUpload(): void {
+  if(!uploadFormRef.value?.validate() || !file.value){
+    return
+  }
 
+  const uploadDTO = new UploadDTO(title.value, file.value, username.value);
+  console.log(uploadDTO); // TODO: Send to API
 }
 </script>
