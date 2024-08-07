@@ -1,13 +1,19 @@
 <template>
   <q-page class="row items-center justify-evenly">
     <q-card class="row items-center justify-evenly" style="height: calc(80vh - var(--header-height))">
-      <q-scroll-area style="width: 100%; height: 100%">
-        <div v-for="videoListing in videoListings" :key="videoListing.coverBase64">
-          <video-listing-card :video-listing="videoListing" />
+      <q-card-section class="page-title">
+        {{ $t('search.title') }}
+      </q-card-section>
 
-          <div v-if="videoListing !== videoListings[videoListings.length - 1]" class="q-pb-md" />
-        </div>
-      </q-scroll-area>
+      <q-card-section class="full-height full-width q-pa-none">
+        <q-scroll-area style="width: 100%; height: calc(100% - var(--page-title-height))">
+          <div v-for="videoListing in videoListings" :key="videoListing.coverBase64">
+            <video-listing-card :video-listing="videoListing" />
+
+            <div v-if="videoListing !== videoListings[videoListings.length - 1]" class="q-pb-md" />
+          </div>
+        </q-scroll-area>
+      </q-card-section>
     </q-card>
   </q-page>
 </template>
