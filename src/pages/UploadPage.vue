@@ -2,7 +2,7 @@
   <q-page class="row items-center justify-evenly">
     <q-card>
       <q-card-section class="q-pa-none q-pb-md text-h5">
-        {{ $t('upload.title') }}
+        {{ $t('upload-video.title') }}
       </q-card-section>
 
       <q-card-section class="q-pa-none">
@@ -12,7 +12,7 @@
             <div class="col">
               <q-input
                 v-model="title"
-                :placeholder="$t('upload.placeholder.title')"
+                :placeholder="$t('upload-video.placeholder.title')"
                 :rules="[() => ruleService.isSet(title)]"
                 required standout
               />
@@ -22,7 +22,7 @@
             <div class="col">
               <q-input
                 v-model="username"
-                :placeholder="$t('upload.placeholder.username')"
+                :placeholder="$t('upload-video.placeholder.username')"
                 :rules="[() => ruleService.isSet(username)]"
                 required standout
               />
@@ -34,7 +34,7 @@
             <div class="col">
               <q-file
                 v-model="video"
-                :label="$t('upload.placeholder.file')"
+                :label="$t('upload-video.placeholder.file')"
                 :rules="[() => ruleService.isSet(video)]"
                 standout
               >
@@ -48,7 +48,7 @@
             <div class="col">
               <q-file
                 v-model="cover"
-                :label="$t('upload.placeholder.cover')"
+                :label="$t('upload-video.placeholder.cover')"
                 :rules="[() => ruleService.isSet(cover)]"
                 standout
               >
@@ -66,13 +66,13 @@
 
       <q-card-actions align="center" class="q-pa-none">
         <q-btn
-          :label="$t('upload.label.reset')"
+          :label="$t('upload-video.label.reset')"
           @click="onReset"
           color="grey-5" no-caps text-color="black" unelevated
         />
 
         <q-btn
-          :label="$t('upload.label.upload')"
+          :label="$t('upload-video.label.upload-video')"
           @click="onUpload"
           color="primary" no-caps unelevated
         />
@@ -82,12 +82,15 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue';
-import { UploadDTO } from 'src/dtos/UploadDTO';
 import { QForm } from 'quasar';
+import { inject, Ref, ref } from 'vue';
 import { RuleService } from 'src/services/RuleService';
+import { UploadDTO } from 'src/dtos/UploadDTO';
+import { uploadVideoApiInjectionKey } from 'src/injection-keys';
+import { IUploadVideoApi } from 'src/services/apis/upload-video/IUploadVideoApi';
 
 // Helpers
+const uploadApi: IUploadVideoApi | undefined = inject(uploadVideoApiInjectionKey);
 const ruleService = new RuleService();
 
 // References
@@ -106,12 +109,12 @@ function onReset(): void {
   cover.value = null;
 }
 
-function onUpload(): void {
+async function onUpload(): Promise<void> {
   if (!uploadFormRef.value?.validate() || !video.value || !cover.value) {
     return;
   }
 
   const uploadDTO = new UploadDTO(title.value, username.value, video.value, cover.value);
-  console.log(uploadDTO); // TODO: Send to API
+  await uploadApi!.post(uploadDTO);
 }
 </script>

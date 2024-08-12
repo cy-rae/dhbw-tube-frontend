@@ -20,5 +20,13 @@
   "upload.label.upload": "Upload",
   "upload.label.reset": "Zurücksetzen",
 
-  "rule.empty-field": "Bitte füllen Sie dieses Feld aus."
+  "rule.empty-field": "Bitte füllen Sie dieses Feld aus.",
+
+  "message.upload-video": "Das Video wurde erfolgreich hochgeladen.",
+
+  "error-message.load-video": "Ein Fehler ist beim Laden des Videos aufgetreten. Fehlercode: ",
+  "error-message.upload-video": "Ein Fehler ist beim Hochladen des Videos aufgetreten. Fehlercode: ",
+  "error-message.stream-video": "Ein Fehler ist beim Streamen des Videos aufgetreten. Fehlercode: ",
+  "error-message.load-videos": "Ein Fehler ist beim Laden der Videos aufgetreten. Fehlercode: ",
+  "error-message.search-videos": "Ein Fehler ist bei der Suche nach Videos aufgetreten. Fehlercode: "
 }

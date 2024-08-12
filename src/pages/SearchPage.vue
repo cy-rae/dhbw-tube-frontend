@@ -28,7 +28,7 @@ const videoListings: Ref<VideoListingDTO[]> = ref([]);
 
 onMounted(async () => {
   // TODO: Load video listings
-  // videoListings.value = await FindVideoListingsApi.execute(new VideoFilterDTO());
+  // videoListings.value = await FilterVideosApi.execute(new VideoFilterDTO());
 
   videoListings.value = [
     {

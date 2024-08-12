@@ -20,5 +20,13 @@
   "upload.label.upload": "Upload",
   "upload.label.reset": "Reset",
 
-  "rule.empty-field": "Please fill in this field."
+  "rule.empty-field": "Please fill in this field.",
+
+  "message.upload-video": "The video was uploaded successfully.",
+
+  "error-message.load-video": "An error occurred while loading the video. Error code: ",
+  "error-message.upload-video": "An error occurred while uploading the video. Error code: ",
+  "error-message.stream-video": "An error occurred while streaming the video. Error code: ",
+  "error-message.load-videos": "An error occurred while loading the videos. Error code: ",
+  "error-message.search-videos": "An error occurred while searching for videos. Error code: "
 }
