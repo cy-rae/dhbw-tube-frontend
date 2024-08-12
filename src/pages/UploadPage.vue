@@ -2,7 +2,7 @@
   <q-page class="row items-center justify-evenly">
     <q-card>
       <q-card-section class="q-pa-none q-pb-md text-h5">
-        {{ $t('upload-video.title') }}
+        {{ $t('upload.title') }}
       </q-card-section>
 
       <q-card-section class="q-pa-none">
@@ -12,7 +12,7 @@
             <div class="col">
               <q-input
                 v-model="title"
-                :placeholder="$t('upload-video.placeholder.title')"
+                :placeholder="$t('upload.placeholder.title')"
                 :rules="[() => ruleService.isSet(title)]"
                 required standout
               />
@@ -22,7 +22,7 @@
             <div class="col">
               <q-input
                 v-model="username"
-                :placeholder="$t('upload-video.placeholder.username')"
+                :placeholder="$t('upload.placeholder.username')"
                 :rules="[() => ruleService.isSet(username)]"
                 required standout
               />
@@ -34,7 +34,7 @@
             <div class="col">
               <q-file
                 v-model="video"
-                :label="$t('upload-video.placeholder.file')"
+                :label="$t('upload.placeholder.file')"
                 :rules="[() => ruleService.isSet(video)]"
                 standout
               >
@@ -48,7 +48,7 @@
             <div class="col">
               <q-file
                 v-model="cover"
-                :label="$t('upload-video.placeholder.cover')"
+                :label="$t('upload.placeholder.cover')"
                 :rules="[() => ruleService.isSet(cover)]"
                 standout
               >
@@ -66,13 +66,13 @@
 
       <q-card-actions align="center" class="q-pa-none">
         <q-btn
-          :label="$t('upload-video.label.reset')"
+          :label="$t('upload.label.reset')"
           @click="onReset"
           color="grey-5" no-caps text-color="black" unelevated
         />
 
         <q-btn
-          :label="$t('upload-video.label.upload-video')"
+          :label="$t('upload.label.upload')"
           @click="onUpload"
           color="primary" no-caps unelevated
         />

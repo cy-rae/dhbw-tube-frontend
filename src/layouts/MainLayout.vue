@@ -17,6 +17,10 @@
                 </div>
               </div>
               <div>
+                <q-btn
+                  @click="onLanguage"
+                  round
+                  />
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/7/7f/DHBW_CAS_Logo.png"
                   :alt="$t('app.institution')"
@@ -43,4 +47,8 @@ import { ref } from 'vue';
 import NavigationDrawer from 'components/drawers/NavigationDrawer.vue';
 
 const showNavigationDrawer = ref(false);
+
+function onLanguage(): void {
+
+}
 </script>
