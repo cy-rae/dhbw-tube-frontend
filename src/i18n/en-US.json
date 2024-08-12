@@ -19,7 +19,7 @@
   "upload.title": "Video-Upload",
   "upload.placeholder.title": "Video title",
   "upload.placeholder.username": "Username",
-  "upload.placeholder.file": "Video file",
+  "upload.placeholder.video": "Video file",
   "upload.placeholder.cover": "Cover image",
   "upload.label.upload": "Upload",
   "upload.label.reset": "Reset",

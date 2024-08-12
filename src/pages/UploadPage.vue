@@ -6,25 +6,29 @@
       </q-card-section>
 
       <q-card-section class="q-pa-none">
-        <q-form ref="uploadFormRef" class="q-gutter-md">
+        <q-form class="q-gutter-md">
           <div class="row q-col-gutter-md">
             <!-- TITLE -->
             <div class="col">
               <q-input
+                ref="titleRef"
                 v-model="title"
                 :placeholder="$t('upload.placeholder.title')"
                 :rules="[() => ruleService.isSet(title)]"
                 required standout
+                autofocus
               />
             </div>
 
             <!-- USERNAME -->
             <div class="col">
               <q-input
+                ref="usernameRef"
                 v-model="username"
                 :placeholder="$t('upload.placeholder.username')"
                 :rules="[() => ruleService.isSet(username)]"
                 required standout
+                autofocus
               />
             </div>
           </div>
@@ -33,10 +37,11 @@
             <!-- VIDEO -->
             <div class="col">
               <q-file
+                ref="videoRef"
                 v-model="video"
-                :label="$t('upload.placeholder.file')"
+                :label="$t('upload.placeholder.video')"
                 :rules="[() => ruleService.isSet(video)]"
-                standout
+                standout accept=""
               >
                 <template v-slot:prepend>
                   <q-icon name="attach_file" />
@@ -47,10 +52,11 @@
             <!-- COVER -->
             <div class="col">
               <q-file
+                ref="coverRef"
                 v-model="cover"
                 :label="$t('upload.placeholder.cover')"
                 :rules="[() => ruleService.isSet(cover)]"
-                standout
+                standout accept=""
               >
                 <template v-slot:prepend>
                   <q-icon name="attach_file" />
@@ -82,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-import { QForm } from 'quasar';
+import { QFile, QForm, QInput } from 'quasar';
 import { inject, Ref, ref } from 'vue';
 import { RuleService } from 'src/services/RuleService';
 import { UploadDTO } from 'src/dtos/UploadDTO';
@@ -94,13 +100,17 @@ const uploadApi: IUploadVideoApi | undefined = inject(uploadVideoApiInjectionKey
 const ruleService = new RuleService();
 
 // References
-const uploadFormRef: Ref<InstanceType<typeof QForm> | null> = ref(null);
+const titleRef: Ref<InstanceType<typeof QInput> | null> = ref(null);
+const usernameRef: Ref<InstanceType<typeof QInput> | null> = ref(null);
+const videoRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
+const coverRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 
 // Models
 const title = ref('');
 const username = ref('');
 const video: Ref<File | null | undefined> = ref(null);
 const cover: Ref<File | null | undefined> = ref(null);
+
 
 function onReset(): void {
   title.value = '';
@@ -110,7 +120,12 @@ function onReset(): void {
 }
 
 async function onUpload(): Promise<void> {
-  if (!uploadFormRef.value?.validate() || !video.value || !cover.value) {
+  const isTitleValid = titleRef.value?.validate();
+  const isUsernameValid = usernameRef.value?.validate();
+  const isVideoValid = videoRef.value?.validate();
+  const isCoverValid = coverRef.value?.validate();
+
+  if (!isTitleValid || !isUsernameValid || !isVideoValid || !isCoverValid || !video.value || !cover.value) {
     return;
   }
 

@@ -4,6 +4,6 @@ export class RuleService {
   private i18n = useI18n();
 
   isSet(value: unknown) {
-    return value ? true : this.i18n.t('rule.empty-field') ;
+    return value ? true : this.i18n.t('rule.empty-field');
   }
 }
