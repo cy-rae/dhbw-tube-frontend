@@ -16,16 +16,16 @@
                   </div>
                 </div>
               </div>
-              <div>
-                <q-btn
-                  @click="onLanguage"
-                  round
-                  />
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/7/7f/DHBW_CAS_Logo.png"
-                  :alt="$t('app.institution')"
-                  class="toolbar-logo"
-                >
+
+              <div class="row justify-evenly items-centers">
+                <language-buttons />
+                <div class="col">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/7f/DHBW_CAS_Logo.png"
+                    :alt="$t('app.institution')"
+                    class="toolbar-logo"
+                  >
+                </div>
               </div>
             </q-toolbar-title>
           </q-toolbar>
@@ -45,10 +45,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import NavigationDrawer from 'components/drawers/NavigationDrawer.vue';
+import LanguageButtons from 'components/button/LanguageButtons.vue';
 
 const showNavigationDrawer = ref(false);
-
-function onLanguage(): void {
-
-}
 </script>
