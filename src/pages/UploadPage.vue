@@ -91,7 +91,7 @@
 import { QFile, QForm, QInput } from 'quasar';
 import { inject, Ref, ref } from 'vue';
 import { RuleService } from 'src/services/RuleService';
-import { UploadDTO } from 'src/dtos/UploadDTO';
+import { UploadVideoDTO } from 'src/dtos/UploadVideoDTO';
 import { uploadVideoApiInjectionKey } from 'src/injection-keys';
 import { IUploadVideoApi } from 'src/services/apis/upload-video/IUploadVideoApi';
 
@@ -129,7 +129,7 @@ async function onUpload(): Promise<void> {
     return;
   }
 
-  const uploadDTO = new UploadDTO(title.value, username.value, video.value, cover.value);
+  const uploadDTO = new UploadVideoDTO(title.value, username.value, video.value, cover.value);
   await uploadApi!.post(uploadDTO);
 }
 </script>

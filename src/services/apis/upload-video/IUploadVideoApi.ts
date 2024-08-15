@@ -1,5 +1,5 @@
-import { UploadDTO } from 'src/dtos/UploadDTO';
+import { UploadVideoDTO } from 'src/dtos/UploadVideoDTO';
 
 export interface IUploadVideoApi {
-  post(payload: UploadDTO): Promise<void>;
+  post(payload: UploadVideoDTO): Promise<void>;
 }
