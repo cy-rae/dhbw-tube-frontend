@@ -134,15 +134,16 @@ async function onUpload(): Promise<void> {
     return;
   }
 
-  await uploadVideoApi!.post(uploadVideoDTO);
+  const uploadedSuccessfully = await uploadVideoApi!.post(uploadVideoDTO);
+  if (uploadedSuccessfully)
+    uploadVideoDTO.reset();
 }
 
 function onFileRejected(): void {
-  console.log(1111);
   q.notify({
     type: 'negative',
     message: i18n.t('error-message.file-size-exceeded'),
-    position: 'top',
+    position: 'top'
   });
 }
 </script>
