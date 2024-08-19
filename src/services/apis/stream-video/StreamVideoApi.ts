@@ -1,6 +1,7 @@
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
-import axios, { AxiosResponse, HttpStatusCode } from 'axios';
+import { AxiosResponse, HttpStatusCode } from 'axios';
+import { api } from 'src/boot/axios';
 import { VideoDTO } from 'src/dtos/VideoDTO';
 import { IStreamVideoApi } from 'src/services/apis/stream-video/IStreamVideoApi';
 import { StreamVideoDTO } from 'src/dtos/StreamVideoDTO';
@@ -10,12 +11,13 @@ export class StreamVideoApi implements IStreamVideoApi {
   private i18n = useI18n();
 
   async get(id: number): Promise<StreamVideoDTO | null> {
-    const response: AxiosResponse = await axios.get('/video/stream/' + id);
+    const response: AxiosResponse = await api.get('/video/stream/' + id);
 
     if (response.status != HttpStatusCode.Ok) {
       this.q.notify({
         type: 'negative',
-        message: this.i18n.t('error-message.stream-video') + response.status
+        message: this.i18n.t('error-message.stream-video') + response.status,
+        position: 'top'
       });
       return null;
     }

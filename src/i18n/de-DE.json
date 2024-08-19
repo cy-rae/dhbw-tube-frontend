@@ -19,8 +19,9 @@
   "upload.title": "Video-Upload",
   "upload.placeholder.title": "Videotitel",
   "upload.placeholder.username": "Username",
-  "upload.placeholder.video": "Videodatei",
-  "upload.placeholder.cover": "Cover-Bild",
+  "upload.placeholder.description": "Beschreibung",
+  "upload.placeholder.video": "Videodatei (max. 10 MB)",
+  "upload.placeholder.cover": "Cover-Bild (max. 2 MB)",
   "upload.label.upload": "Upload",
   "upload.label.reset": "Zurücksetzen",
 
@@ -28,6 +29,7 @@
 
   "message.upload-video": "Das Video wurde erfolgreich hochgeladen.",
 
+  "error-message.file-size-exceeded": "Die ausgewählte Datei überschreitet die max. Dateigröße.",
   "error-message.load-video": "Ein Fehler ist beim Laden des Videos aufgetreten. Fehlercode: ",
   "error-message.upload-video": "Ein Fehler ist beim Hochladen des Videos aufgetreten. Fehlercode: ",
   "error-message.stream-video": "Ein Fehler ist beim Streamen des Videos aufgetreten. Fehlercode: ",

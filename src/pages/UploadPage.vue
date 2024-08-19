@@ -15,8 +15,8 @@
                 v-model="title"
                 :placeholder="$t('upload.placeholder.title')"
                 :rules="[() => ruleService.isSet(title)]"
+                :autofocus="false"
                 required standout
-                autofocus
               />
             </div>
 
@@ -24,11 +24,11 @@
             <div class="col">
               <q-input
                 ref="usernameRef"
-                v-model="username"
+                v-model="creator"
                 :placeholder="$t('upload.placeholder.username')"
-                :rules="[() => ruleService.isSet(username)]"
+                :rules="[() => ruleService.isSet(creator)]"
+                :autofocus="false"
                 required standout
-                autofocus
               />
             </div>
           </div>
@@ -41,7 +41,9 @@
                 v-model="video"
                 :label="$t('upload.placeholder.video')"
                 :rules="[() => ruleService.isSet(video)]"
-                standout accept=""
+                @rejected="onFileRejected"
+                accept="video/*" max-file-size="10485760"
+                standout clearable
               >
                 <template v-slot:prepend>
                   <q-icon name="attach_file" />
@@ -56,7 +58,9 @@
                 v-model="cover"
                 :label="$t('upload.placeholder.cover')"
                 :rules="[() => ruleService.isSet(cover)]"
-                standout accept=""
+                @rejected="onFileRejected"
+                accept="image/*" max-file-size="2097152"
+                standout clearable
               >
                 <template v-slot:prepend>
                   <q-icon name="attach_file" />
@@ -65,6 +69,15 @@
             </div>
           </div>
 
+          <!-- DESCRIPTION -->
+          <div class="row q-col-gutter-md q-pt-md">
+            <q-input
+              v-model="description"
+              :placeholder="$t('upload.placeholder.description')"
+              :autofocus="false"
+              standout type="textarea" class="full-width"
+            />
+          </div>
         </q-form>
       </q-card-section>
 
@@ -88,14 +101,17 @@
 </template>
 
 <script setup lang="ts">
-import { QFile, QForm, QInput } from 'quasar';
+import { QFile, QForm, QInput, useQuasar } from 'quasar';
 import { inject, Ref, ref } from 'vue';
 import { RuleService } from 'src/services/RuleService';
 import { UploadVideoDTO } from 'src/dtos/UploadVideoDTO';
 import { uploadVideoApiInjectionKey } from 'src/injection-keys';
 import { IUploadVideoApi } from 'src/services/apis/upload-video/IUploadVideoApi';
+import { useI18n } from 'vue-i18n';
 
 // Helpers
+const q = useQuasar();
+const i18n = useI18n();
 const uploadApi: IUploadVideoApi | undefined = inject(uploadVideoApiInjectionKey);
 const ruleService = new RuleService();
 
@@ -107,14 +123,16 @@ const coverRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 
 // Models
 const title = ref('');
-const username = ref('');
+const creator = ref('');
+const description = ref('');
 const video: Ref<File | null | undefined> = ref(null);
 const cover: Ref<File | null | undefined> = ref(null);
 
 
 function onReset(): void {
   title.value = '';
-  username.value = '';
+  creator.value = '';
+  description.value = '';
   video.value = null;
   cover.value = null;
 }
@@ -129,7 +147,16 @@ async function onUpload(): Promise<void> {
     return;
   }
 
-  const uploadDTO = new UploadVideoDTO(title.value, username.value, video.value, cover.value);
+  const uploadDTO = new UploadVideoDTO(title.value, creator.value, description.value, video.value, cover.value);
   await uploadApi!.post(uploadDTO);
+}
+
+function onFileRejected(): void {
+  console.log(1111);
+  q.notify({
+    type: 'negative',
+    message: i18n.t('error-message.file-size-exceeded'),
+    position: 'top',
+  });
 }
 </script>
