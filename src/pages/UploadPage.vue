@@ -12,9 +12,9 @@
             <div class="col">
               <q-input
                 ref="titleRef"
-                v-model="title"
+                v-model="uploadVideoDTO.title"
                 :placeholder="$t('upload.placeholder.title')"
-                :rules="[() => ruleService.isSet(title)]"
+                :rules="[() => ruleService.isSet(uploadVideoDTO.title)]"
                 :autofocus="false"
                 required standout
               />
@@ -24,9 +24,9 @@
             <div class="col">
               <q-input
                 ref="usernameRef"
-                v-model="creator"
+                v-model="uploadVideoDTO.creator"
                 :placeholder="$t('upload.placeholder.username')"
-                :rules="[() => ruleService.isSet(creator)]"
+                :rules="[() => ruleService.isSet(uploadVideoDTO.creator)]"
                 :autofocus="false"
                 required standout
               />
@@ -38,9 +38,9 @@
             <div class="col">
               <q-file
                 ref="videoRef"
-                v-model="video"
+                v-model="uploadVideoDTO.video"
                 :label="$t('upload.placeholder.video')"
-                :rules="[() => ruleService.isSet(video)]"
+                :rules="[() => ruleService.isSet(uploadVideoDTO.video)]"
                 @rejected="onFileRejected"
                 accept="video/*" max-file-size="10485760"
                 standout clearable
@@ -55,9 +55,9 @@
             <div class="col">
               <q-file
                 ref="coverRef"
-                v-model="cover"
+                v-model="uploadVideoDTO.cover"
                 :label="$t('upload.placeholder.cover')"
-                :rules="[() => ruleService.isSet(cover)]"
+                :rules="[() => ruleService.isSet(uploadVideoDTO.cover)]"
                 @rejected="onFileRejected"
                 accept="image/*" max-file-size="2097152"
                 standout clearable
@@ -72,7 +72,7 @@
           <!-- DESCRIPTION -->
           <div class="row q-col-gutter-md q-pt-md">
             <q-input
-              v-model="description"
+              v-model="uploadVideoDTO.description"
               :placeholder="$t('upload.placeholder.description')"
               :autofocus="false"
               standout type="textarea" class="full-width"
@@ -86,7 +86,7 @@
       <q-card-actions align="center" class="q-pa-none">
         <q-btn
           :label="$t('upload.label.reset')"
-          @click="onReset"
+          @click="uploadVideoDTO.reset()"
           color="grey-5" no-caps text-color="black" unelevated
         />
 
@@ -102,7 +102,7 @@
 
 <script setup lang="ts">
 import { QFile, QForm, QInput, useQuasar } from 'quasar';
-import { inject, Ref, ref } from 'vue';
+import { inject, reactive, Ref, ref } from 'vue';
 import { RuleService } from 'src/services/RuleService';
 import { UploadVideoDTO } from 'src/dtos/UploadVideoDTO';
 import { uploadVideoApiInjectionKey } from 'src/injection-keys';
@@ -112,7 +112,7 @@ import { useI18n } from 'vue-i18n';
 // Helpers
 const q = useQuasar();
 const i18n = useI18n();
-const uploadApi: IUploadVideoApi | undefined = inject(uploadVideoApiInjectionKey);
+const uploadVideoApi: IUploadVideoApi | undefined = inject(uploadVideoApiInjectionKey);
 const ruleService = new RuleService();
 
 // References
@@ -122,20 +122,7 @@ const videoRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 const coverRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 
 // Models
-const title = ref('');
-const creator = ref('');
-const description = ref('');
-const video: Ref<File | null | undefined> = ref(null);
-const cover: Ref<File | null | undefined> = ref(null);
-
-
-function onReset(): void {
-  title.value = '';
-  creator.value = '';
-  description.value = '';
-  video.value = null;
-  cover.value = null;
-}
+const uploadVideoDTO = reactive(new UploadVideoDTO());
 
 async function onUpload(): Promise<void> {
   const isTitleValid = titleRef.value?.validate();
@@ -143,12 +130,11 @@ async function onUpload(): Promise<void> {
   const isVideoValid = videoRef.value?.validate();
   const isCoverValid = coverRef.value?.validate();
 
-  if (!isTitleValid || !isUsernameValid || !isVideoValid || !isCoverValid || !video.value || !cover.value) {
+  if (!isTitleValid || !isUsernameValid || !isVideoValid || !isCoverValid || !uploadVideoDTO.video || !uploadVideoDTO.cover) {
     return;
   }
 
-  const uploadDTO = new UploadVideoDTO(title.value, creator.value, description.value, video.value, cover.value);
-  await uploadApi!.post(uploadDTO);
+  await uploadVideoApi!.post(uploadVideoDTO);
 }
 
 function onFileRejected(): void {

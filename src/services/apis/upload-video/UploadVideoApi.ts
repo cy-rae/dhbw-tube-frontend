@@ -9,13 +9,13 @@ export class UploadVideoApi implements IUploadVideoApi {
   private q = useQuasar();
   private i18n = useI18n();
 
-  async post(payload: UploadVideoDTO): Promise<void> {
+  async post(uploadVideoDTO: UploadVideoDTO): Promise<void> {
     const formData = new FormData();
-    formData.append('title', payload.title);
-    formData.append('creator', payload.creator);
-    formData.append('description', payload.description);
-    formData.append('video', payload.video);
-    formData.append('cover', payload.cover);
+    formData.append('title', uploadVideoDTO.title);
+    formData.append('creator', uploadVideoDTO.creator);
+    formData.append('description', uploadVideoDTO.description);
+    formData.append('video', uploadVideoDTO.video!);
+    formData.append('cover', uploadVideoDTO.cover!);
 
     const response: AxiosResponse = await api.post('/upload', formData, {
       headers: {
@@ -26,13 +26,13 @@ export class UploadVideoApi implements IUploadVideoApi {
     if (response.status == HttpStatusCode.Created) {
       this.q.notify({
         type: 'positive',
-        message: this.i18n.t('message.upload-video-video') + response.status,
+        message: this.i18n.t('message.upload-video'),
         position: 'top'
       });
     } else {
       this.q.notify({
         type: 'negative',
-        message: this.i18n.t('error-message.upload-video-video'),
+        message: this.i18n.t('error-message.upload-video-video') + response.status,
         position: 'top'
       });
     }

@@ -2,14 +2,22 @@ export class UploadVideoDTO {
   title: string;
   creator: string;
   description: string;
-  video: File;
-  cover: File;
+  video: File | null | undefined;
+  cover: File | null | undefined;
 
-  constructor(title: string, creator: string, description: string, video: File, cover: File) {
-    this.title = title;
-    this.creator = creator;
-    this.description = description;
-    this.video = video;
-    this.cover = cover;
+  constructor() {
+    this.title = '';
+    this.creator = '';
+    this.description = '';
+    this.video = null;
+    this.cover = null;
+  }
+
+  reset(): void {
+    this.title = '';
+    this.creator = '';
+    this.description = '';
+    this.video = null;
+    this.cover = null;
   }
 }
