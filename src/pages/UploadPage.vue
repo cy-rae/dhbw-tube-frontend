@@ -134,9 +134,7 @@ async function onUpload(): Promise<void> {
     return;
   }
 
-  const uploadedSuccessfully = await uploadVideoApi!.post(uploadVideoDTO);
-  if (uploadedSuccessfully)
-    uploadVideoDTO.reset();
+  await uploadVideoApi!.post(uploadVideoDTO);
 }
 
 function onFileRejected(): void {

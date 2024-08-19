@@ -9,7 +9,7 @@ export class UploadVideoApi implements IUploadVideoApi {
   private q = useQuasar();
   private i18n = useI18n();
 
-  async post(uploadVideoDTO: UploadVideoDTO): Promise<boolean> {
+  async post(uploadVideoDTO: UploadVideoDTO): Promise<void> {
     const formData = new FormData();
     formData.append('title', uploadVideoDTO.title);
     formData.append('creator', uploadVideoDTO.creator);
@@ -29,14 +29,12 @@ export class UploadVideoApi implements IUploadVideoApi {
         message: this.i18n.t('message.upload-video'),
         position: 'top'
       });
-      return true;
     } else {
       this.q.notify({
         type: 'negative',
         message: this.i18n.t('error-message.upload-video-video') + response.status,
         position: 'top'
       });
-      return false;
     }
   }
 }
