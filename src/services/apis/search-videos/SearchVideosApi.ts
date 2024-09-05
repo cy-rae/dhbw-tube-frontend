@@ -1,12 +1,12 @@
 import { AxiosResponse, HttpStatusCode } from 'axios';
 import { VideoListingDTO } from 'src/dtos/VideoListingDTO';
 import { VideoFilterDTO } from 'src/dtos/VideoFilterDTO';
-import { IFilterVideosApi } from 'src/services/apis/filter-videos/IFilterVideosApi';
+import { ISearchVideosApi } from 'src/services/apis/search-videos/ISearchVideosApi';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import { api } from 'boot/axios';
 
-export class FilterVideosApi implements IFilterVideosApi {
+export class SearchVideosApi implements ISearchVideosApi {
   private q = useQuasar();
   private i18n = useI18n();
 
