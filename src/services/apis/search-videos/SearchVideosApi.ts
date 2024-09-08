@@ -10,8 +10,10 @@ export class SearchVideosApi implements ISearchVideosApi {
   private q = useQuasar();
   private i18n = useI18n();
 
-  async post(filter: VideoFilterDTO): Promise<SearchResult | null> {
-    const response: AxiosResponse = await api.post('/videos/search', filter);
+  async get(filter: VideoFilterDTO): Promise<SearchResult | null> {
+    const response: AxiosResponse = await api.get('/videos/search', {
+      params: filter
+    });
 
     if (response.status != HttpStatusCode.Ok) {
       this.q.notify({
