@@ -1,6 +1,6 @@
 import { VideoFilterDTO } from 'src/dtos/VideoFilterDTO';
-import { VideoListingDTO } from 'src/dtos/VideoListingDTO';
+import {SearchResult} from 'src/dtos/SearchResult';
 
 export interface ISearchVideosApi {
-  post(filter: VideoFilterDTO): Promise<VideoListingDTO[] | null>;
+  post(filter: VideoFilterDTO): Promise<SearchResult | null>;
 }

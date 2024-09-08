@@ -20,11 +20,11 @@
 
 <script setup lang="ts">
 import { onMounted, Ref, ref } from 'vue';
-import { VideoListingDTO } from 'src/dtos/VideoListingDTO';
+import { VideoMetadataDTO } from 'src/dtos/VideoMetadataDTO';
 import VideoListingCard from 'components/cards/VideoListingCard.vue';
 
 // Models
-const videoListings: Ref<VideoListingDTO[]> = ref([]);
+const videoListings: Ref<VideoMetadataDTO[]> = ref([]);
 
 onMounted(async () => {
   // TODO: Load video listings

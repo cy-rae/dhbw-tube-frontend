@@ -8,12 +8,14 @@ import { SearchVideosApi } from 'src/services/apis/search-videos/SearchVideosApi
 import { provide } from 'vue';
 import {
   searchVideosApiInjectionKey,
+  getCoverApiInjectionKey,
   getVideoApiInjectionKey,
   streamVideoApiInjectionKey,
   uploadVideoApiInjectionKey
 } from 'src/injection-keys';
 import { GetVideoApi } from 'src/services/apis/get-video/GetVideoApi';
 import { StreamVideoApi } from 'src/services/apis/stream-video/StreamVideoApi';
+import {GetCoverApi} from 'src/services/apis/get-cover/GetCoverApi';
 
 defineOptions({
   name: 'App'
@@ -21,6 +23,7 @@ defineOptions({
 
 // Provide dependencies
 provide(uploadVideoApiInjectionKey, new UploadVideoApi());
+provide(getCoverApiInjectionKey, new GetCoverApi());
 provide(getVideoApiInjectionKey, new GetVideoApi());
 provide(streamVideoApiInjectionKey, new StreamVideoApi());
 provide(searchVideosApiInjectionKey, new SearchVideosApi());
