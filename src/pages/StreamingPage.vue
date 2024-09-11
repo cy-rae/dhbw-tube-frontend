@@ -9,7 +9,7 @@
         <div class="q-mx-auto" style="width: 80%">
           <video
             :src="videoStreamURL"
-            controls autoplay style="aspect-ratio: 16 / 9"  class="q-mx-auto full-height full-width"
+            controls autoplay style="aspect-ratio: 16 / 9" class="q-mx-auto full-height full-width"
           >
             {{ $t('error-message.cannot-load-video') }}
           </video>
@@ -23,8 +23,8 @@
           </div>
         </div>
 
-        <div class="text-h5 q-pt-sm">{{ $t('stream.description') }}</div>
-        {{ videoMetadata.description }}
+        <div class="text-h5 q-pt-md">{{ $t('stream.description') }}</div>
+        <div class="q-pt-md">{{ videoMetadata.description }}</div>
       </q-scroll-area>
     </q-card>
   </q-page>
