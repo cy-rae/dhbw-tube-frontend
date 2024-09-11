@@ -1,7 +1,7 @@
-import {VideoMetadataDTO} from 'src/dtos/VideoMetadataDTO';
+import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
 
 export class SearchResult{
-  videos: VideoMetadataDTO[];
+  videos: VideoListingElementDTO[];
   total: number;
   pages: number;
   currentPage: number;

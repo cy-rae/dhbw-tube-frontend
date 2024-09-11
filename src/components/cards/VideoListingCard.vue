@@ -17,31 +17,39 @@
       <q-separator vertical />
 
       <q-card-section class="q-pa-none q-my-auto q-pl-md">
-        <div class="row text-h5">{{ props.videoMetadata.title }}</div>
-        <div class="row text-h6">{{ $t('stream.by') }} {{ props.videoMetadata.creator }}</div>
+        <div class="row text-h5">{{ props.videoListingElement.title }}</div>
+        <div class="row text-h6">
+          <div class="col">
+            {{ $t('stream.by') }} {{ props.videoListingElement.creator }}
+          </div>
+          {{$t('stream.uploaded-date')}}: {{ dateService!.getFormattedDate(videoListingElement.upload_date) }}
+        </div>
       </q-card-section>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
-import { VideoMetadataDTO } from 'src/dtos/VideoMetadataDTO';
 import { useRouter } from 'vue-router';
 import { RoutePaths } from 'src/enums/RoutePaths';
-import {getCoverApiInjectionKey} from 'src/injection-keys';
+import {dateServiceInjectionKey, getCoverApiInjectionKey} from 'src/injection-keys';
 import {inject, onMounted, ref} from 'vue';
 import {IGetCoverApi} from 'src/services/apis/get-cover/IGetCoverApi';
+import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
+import {IDateService} from 'src/services/date-service/IDateService';
 
 // Helpers
-const getCoverApi: IGetCoverApi | undefined = inject(getCoverApiInjectionKey);
 const router = useRouter();
+const getCoverApi: IGetCoverApi | undefined = inject(getCoverApiInjectionKey);
+const dateService: IDateService | undefined = inject(dateServiceInjectionKey);
 
 // Variables
 let cover = ref<string>('');
 
+
 // Properties
 interface Props {
-  videoMetadata: VideoMetadataDTO;
+  videoListingElement: VideoListingElementDTO
 }
 
 const props = defineProps<Props>();
@@ -51,11 +59,11 @@ onMounted(async () => {
 });
 
 function onVideoListing() {
-  router.push(RoutePaths.STREAMING_PAGE);
+  router.push({path: RoutePaths.STREAMING_PAGE, query: {id: props.videoListingElement.id}});
 }
 
 async function loadCover(): Promise<void> {
-  const response: string | null = await getCoverApi!.get(props.videoMetadata.id);
+  const response: string | null = await getCoverApi!.get(props.videoListingElement.id);
   if (response) {
     cover.value = response;
   }

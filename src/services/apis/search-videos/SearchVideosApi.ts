@@ -5,7 +5,7 @@ import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import { api } from 'boot/axios';
 import { SearchResult } from 'src/dtos/SearchResult';
-import {VideoMetadataDTO} from 'src/dtos/VideoMetadataDTO';
+import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
 
 export class SearchVideosApi implements ISearchVideosApi {
   private q = useQuasar();
@@ -34,23 +34,20 @@ export class SearchVideosApi implements ISearchVideosApi {
     searchResult.pages = response.data['pages'];
     searchResult.currentPage = response.data['current_page'];
     searchResult.perPage = response.data['per_page'];
-    searchResult.videos = this.convertVideoMetadata(response);
+    searchResult.videos = this.convertToVideoListing(response);
 
     return searchResult;
   }
 
-  private convertVideoMetadata(response: AxiosResponse): VideoMetadataDTO[] {
-    const videos: VideoMetadataDTO[] = [];
+  private convertToVideoListing(response: AxiosResponse): VideoListingElementDTO[] {
+    const videos: VideoListingElementDTO[] = [];
     for(const elem of response.data['videos']){
-      const videoMetadata = new VideoMetadataDTO();
-      videoMetadata.id = elem['id'];
-      videoMetadata.title = elem['title'];
-      videoMetadata.creator = elem['creator'];
-      videoMetadata.description = elem['description'];
-      videoMetadata.cover_filename = elem['cover_filename'];
-      videoMetadata.video_filename = elem['video_filename'];
-      videoMetadata.upload_date = new Date(elem['upload_date']);
-      videos.push(videoMetadata);
+      const videoListingElement = new VideoListingElementDTO();
+      videoListingElement.id = elem['id'];
+      videoListingElement.title = elem['title'];
+      videoListingElement.creator = elem['creator'];
+      videoListingElement.upload_date = new Date(elem['upload_date']);
+      videos.push(videoListingElement);
     }
 
     return videos;

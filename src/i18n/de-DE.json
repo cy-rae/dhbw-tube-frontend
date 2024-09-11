@@ -3,6 +3,7 @@
   "app.title-1": "DH",
   "app.title-2": "BW Tube",
   "app.institution": "DHBW CAS",
+  "app.date-format": "dd.MM.yyyy HH:mm",
 
   "nav.stream": "Stream",
   "nav.upload": "Upload",
@@ -14,8 +15,9 @@
   "search.cover-alt": "Cover-Bild",
   "search.no-videos": "Es wurden keine Videos gefunden.",
 
-  "stream.comments": "Kommentare",
   "stream.by": "von",
+  "stream.upload-date": "Upload-Datum",
+  "stream.description": "Beschreibung",
 
   "upload.title": "Video-Upload",
   "upload.placeholder.title": "Videotitel",
@@ -31,6 +33,7 @@
   "message.upload-video": "Das Video wurde erfolgreich hochgeladen.",
 
   "error-message.file-size-exceeded": "Die ausgewählte Datei überschreitet die max. Dateigröße.",
+  "error-message.cannot-load-video": "Ein Fehler ist beim Laden des Videos aufgetreten.",
   "error-message.load-cover": "Ein Fehler ist beim Laden des Covers aufgetreten. Fehlercode: ",
   "error-message.load-video": "Ein Fehler ist beim Laden des Videos aufgetreten. Fehlercode: ",
   "error-message.upload-video": "Ein Fehler ist beim Hochladen des Videos aufgetreten. Fehlercode: ",

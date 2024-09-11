@@ -7,24 +7,31 @@ import { UploadVideoApi } from 'src/services/apis/upload-video/UploadVideoApi';
 import { SearchVideosApi } from 'src/services/apis/search-videos/SearchVideosApi';
 import { provide } from 'vue';
 import {
-  searchVideosApiInjectionKey,
+  uploadVideoApiInjectionKey,
   getCoverApiInjectionKey,
-  getVideoApiInjectionKey,
+  getVideoMetadataApiInjectionKey,
   streamVideoApiInjectionKey,
-  uploadVideoApiInjectionKey
+  searchVideosApiInjectionKey,
+  dateServiceInjectionKey
 } from 'src/injection-keys';
-import { GetVideoApi } from 'src/services/apis/get-video/GetVideoApi';
+import { GetVideoMetadataApi } from 'src/services/apis/get-video-metadata/GetVideoMetadataApi';
 import { StreamVideoApi } from 'src/services/apis/stream-video/StreamVideoApi';
 import {GetCoverApi} from 'src/services/apis/get-cover/GetCoverApi';
+import {DateService} from 'src/services/date-service/DateService';
 
 defineOptions({
   name: 'App'
 });
 
-// Provide dependencies
+// Provide upload API service
 provide(uploadVideoApiInjectionKey, new UploadVideoApi());
+
+// Provide stream API services
 provide(getCoverApiInjectionKey, new GetCoverApi());
-provide(getVideoApiInjectionKey, new GetVideoApi());
+provide(getVideoMetadataApiInjectionKey, new GetVideoMetadataApi());
 provide(streamVideoApiInjectionKey, new StreamVideoApi());
 provide(searchVideosApiInjectionKey, new SearchVideosApi());
+
+// Provide other services
+provide(dateServiceInjectionKey, new DateService());
 </script>

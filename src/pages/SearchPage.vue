@@ -12,10 +12,10 @@
           </div>
 
           <div v-else>
-            <div v-for="videoMetadataDTO in searchResult.videos" :key="videoMetadataDTO.id">
-              <video-listing-card :video-metadata="videoMetadataDTO"/>
+            <div v-for="videoListingElement in searchResult.videos" :key="videoListingElement.id">
+              <video-listing-card :video-listing-element="videoListingElement"/>
 
-              <div v-if="videoMetadataDTO !== searchResult.videos[searchResult.videos.length - 1]" class="q-pb-md"/>
+              <div v-if="videoListingElement !== searchResult.videos[searchResult.videos.length - 1]" class="q-pb-md"/>
             </div>
           </div>
         </q-scroll-area>
