@@ -3,7 +3,6 @@
   "app.title-1": "DH",
   "app.title-2": "BW Tube",
   "app.institution": "DHBW CAS",
-  "app.date-format": "MM/DD/YYYY hh:mm a",
 
   "nav.stream": "Stream",
   "nav.upload": "Upload",
@@ -11,9 +10,26 @@
   "locale.en": "en",
   "locale.de": "de",
 
+  "date.format": "MM/DD/YYYY hh:mm a",
+  "date.short-format": "MM/DD/YYYY",
+  "date.mask": "##/##/####",
+  "date-locale.plural-day": "Days",
+  "date-locale.days": "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday",
+  "date-locale.days-short": "Sun_Mon_Tue_Wed_Thu_Fri_Sat",
+  "date-locale.months": "January_February_March_April_May_June_July_August_September_October_November_December",
+  "date-locale.months-short": "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec",
+
   "search.title": "Search",
   "search.cover-alt": "Cover image",
   "search.no-videos": "No videos found.",
+  "search.filter.title": "Title",
+  "search.filter.creator": "Creator",
+  "search.filter.description": "Description",
+  "search.filter.upload-date": "Upload date",
+  "search.filter.sort-by": "Sort by",
+  "search.filter.order": "Order",
+  "search.filter.order.asc": "Ascending",
+  "search.filter.order.desc": "Descending",
 
   "stream.by": "by",
   "stream.upload-date": "Upload date",
@@ -31,6 +47,7 @@
   "rule.empty-field": "Please fill in this field.",
 
   "message.upload-video": "The video was uploaded successfully.",
+  "rule.enter-valid-date": "Please enter a valid date (MM/DD/YYYY).",
 
   "error-message.file-size-exceeded": "The selected file exceeds the maximum file size.",
   "error-message.cannot-load-video": "An error occurred while loading the video.",

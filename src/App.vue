@@ -11,11 +11,13 @@ import {
   getCoverApiInjectionKey,
   getVideoMetadataApiInjectionKey,
   searchVideosApiInjectionKey,
-  dateServiceInjectionKey
+  dateServiceInjectionKey,
+  ruleServiceInjectionKey
 } from 'src/injection-keys';
 import { GetVideoMetadataApi } from 'src/services/apis/get-video-metadata/GetVideoMetadataApi';
 import {GetCoverApi} from 'src/services/apis/get-cover/GetCoverApi';
 import {DateService} from 'src/services/date-service/DateService';
+import {RuleService} from 'src/services/rule-service/RuleService';
 
 defineOptions({
   name: 'App'
@@ -31,4 +33,5 @@ provide(searchVideosApiInjectionKey, new SearchVideosApi());
 
 // Provide other services
 provide(dateServiceInjectionKey, new DateService());
+provide(ruleServiceInjectionKey, new RuleService());
 </script>

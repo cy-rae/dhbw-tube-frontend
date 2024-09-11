@@ -20,7 +20,7 @@
         <div class="row text-h5">{{ props.videoListingElement.title }}</div>
         <div class="row text-h6">{{ $t('stream.by') }} {{ props.videoListingElement.creator }}</div>
         <div class="row">{{ $t('stream.upload-date') }}:
-          {{ dateService!.getFormattedDate(videoListingElement.upload_date) }}
+          {{ dateService.getFormattedDate(videoListingElement.upload_date) }}
         </div>
       </q-card-section>
     </q-card-section>
@@ -38,8 +38,8 @@ import {IDateService} from 'src/services/date-service/IDateService';
 
 // Helpers
 const router = useRouter();
-const getCoverApi: IGetCoverApi | undefined = inject(getCoverApiInjectionKey);
-const dateService: IDateService | undefined = inject(dateServiceInjectionKey);
+const getCoverApi = inject(getCoverApiInjectionKey) as IGetCoverApi;
+const dateService = inject(dateServiceInjectionKey) as IDateService;
 
 // Variables
 let cover = ref<string>('');
@@ -61,7 +61,7 @@ function onVideoListing() {
 }
 
 async function loadCover(): Promise<void> {
-  const response: string | null = await getCoverApi!.get(props.videoListingElement.id);
+  const response: string | null = await getCoverApi.get(props.videoListingElement.id);
   if (response) {
     cover.value = response;
   }

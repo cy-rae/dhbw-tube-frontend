@@ -19,7 +19,7 @@
             <div class="col">
               {{ $t('stream.by') }} {{ videoMetadata.creator }}
             </div>
-            {{ $t('stream.upload-date') }}: {{ dateService!.getFormattedDate(videoMetadata.upload_date) }}
+            {{ $t('stream.upload-date') }}: {{ dateService.getFormattedDate(videoMetadata.upload_date) }}
           </div>
         </div>
 
@@ -42,8 +42,8 @@ import {Urls} from 'src/enums/Urls';
 
 // Helpers
 const route = useRoute();
-const getVideoMetadataApi: IGetVideoMetadataApi | undefined = inject(getVideoMetadataApiInjectionKey);
-const dateService: IDateService | undefined = inject(dateServiceInjectionKey);
+const getVideoMetadataApi = inject(getVideoMetadataApiInjectionKey) as IGetVideoMetadataApi;
+const dateService = inject(dateServiceInjectionKey) as IDateService;
 
 // Variables
 const videoMetadata: Ref<VideoMetadataDTO | null> = ref(null);
@@ -58,7 +58,7 @@ onMounted(async () => {
   if (!videoId)
     return;
 
-  const response = await getVideoMetadataApi!.get(videoId);
+  const response = await getVideoMetadataApi.get(videoId);
   if (!response)
     return;
 

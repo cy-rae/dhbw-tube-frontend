@@ -23,7 +23,7 @@
             <!-- CREATOR -->
             <div class="col">
               <q-input
-                ref="usernameRef"
+                ref="creatorRef"
                 v-model="uploadVideoDTO.creator"
                 :placeholder="$t('upload.placeholder.creator')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.creator)]"
@@ -46,7 +46,7 @@
                 standout clearable
               >
                 <template v-slot:prepend>
-                  <q-icon name="attach_file" />
+                  <q-icon name="attach_file"/>
                 </template>
               </q-file>
             </div>
@@ -63,7 +63,7 @@
                 standout clearable
               >
                 <template v-slot:prepend>
-                  <q-icon name="attach_file" />
+                  <q-icon name="attach_file"/>
                 </template>
               </q-file>
             </div>
@@ -81,7 +81,7 @@
         </q-form>
       </q-card-section>
 
-      <q-separator class="q-my-md" />
+      <q-separator class="q-my-md"/>
 
       <q-card-actions align="center" class="q-pa-none">
         <q-btn
@@ -101,23 +101,23 @@
 </template>
 
 <script setup lang="ts">
-import { QFile, QForm, QInput, useQuasar } from 'quasar';
-import { inject, reactive, Ref, ref } from 'vue';
-import { RuleService } from 'src/services/RuleService';
-import { UploadVideoDTO } from 'src/dtos/UploadVideoDTO';
-import { uploadVideoApiInjectionKey } from 'src/injection-keys';
-import { IUploadVideoApi } from 'src/services/apis/upload-video/IUploadVideoApi';
-import { useI18n } from 'vue-i18n';
+import {QFile, QForm, QInput, useQuasar} from 'quasar';
+import {inject, reactive, Ref, ref} from 'vue';
+import {UploadVideoDTO} from 'src/dtos/UploadVideoDTO';
+import {ruleServiceInjectionKey, uploadVideoApiInjectionKey} from 'src/injection-keys';
+import {IUploadVideoApi} from 'src/services/apis/upload-video/IUploadVideoApi';
+import {useI18n} from 'vue-i18n';
+import {IRuleService} from 'src/services/rule-service/IRuleService';
 
 // Helpers
 const q = useQuasar();
 const i18n = useI18n();
-const uploadVideoApi: IUploadVideoApi | undefined = inject(uploadVideoApiInjectionKey);
-const ruleService = new RuleService();
+const uploadVideoApi = inject(uploadVideoApiInjectionKey) as IUploadVideoApi;
+const ruleService = inject(ruleServiceInjectionKey) as IRuleService;
 
 // References
 const titleRef: Ref<InstanceType<typeof QInput> | null> = ref(null);
-const usernameRef: Ref<InstanceType<typeof QInput> | null> = ref(null);
+const creatorRef: Ref<InstanceType<typeof QInput> | null> = ref(null);
 const videoRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 const coverRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 
@@ -126,7 +126,7 @@ const uploadVideoDTO = reactive(new UploadVideoDTO());
 
 async function onUpload(): Promise<void> {
   const isTitleValid = titleRef.value?.validate();
-  const isUsernameValid = usernameRef.value?.validate();
+  const isUsernameValid = creatorRef.value?.validate();
   const isVideoValid = videoRef.value?.validate();
   const isCoverValid = coverRef.value?.validate();
 
@@ -134,7 +134,7 @@ async function onUpload(): Promise<void> {
     return;
   }
 
-  await uploadVideoApi!.post(uploadVideoDTO);
+  await uploadVideoApi.post(uploadVideoDTO);
 }
 
 function onFileRejected(): void {

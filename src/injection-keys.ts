@@ -4,6 +4,7 @@ import { ISearchVideosApi } from 'src/services/apis/search-videos/ISearchVideosA
 import { IGetVideoMetadataApi } from 'src/services/apis/get-video-metadata/IGetVideoMetadataApi';
 import {IGetCoverApi} from 'src/services/apis/get-cover/IGetCoverApi';
 import {IDateService} from 'src/services/date-service/IDateService';
+import {IRuleService} from 'src/services/rule-service/IRuleService';
 
 // Upload API service
 export const uploadVideoApiInjectionKey: InjectionKey<IUploadVideoApi> = Symbol('Injection key for API service to upload a video.');
@@ -15,3 +16,4 @@ export const searchVideosApiInjectionKey: InjectionKey<ISearchVideosApi> = Symbo
 
 // Other services
 export const dateServiceInjectionKey: InjectionKey<IDateService> = Symbol('Injection key for date service.');
+export const ruleServiceInjectionKey: InjectionKey<IRuleService> = Symbol('Injection key for rule service.');

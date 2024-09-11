@@ -6,8 +6,8 @@ export class VideoFilterDTO {
   creator: string;
   description: string;
   upload_date: string;
-  sortBy: SortByProps;
-  order: Order;
+  sortBy: string;
+  order: string;
   page: number;
   per_page: number;
 
