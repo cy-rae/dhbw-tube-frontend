@@ -9,7 +9,7 @@ export class GetCoverApi implements IGetCoverApi {
   private i18n = useI18n();
 
   public async get(videoId: string): Promise<string | null> {
-    const response: AxiosResponse = await api.get('/video/cover/' + videoId, {
+    const response: AxiosResponse = await api.get('/cover/' + videoId, {
       responseType: 'blob',
     });
 
