@@ -18,7 +18,7 @@
 
       <q-card-section class="q-pa-none q-my-auto q-pl-md">
         <div class="row text-h5">{{ props.videoMetadata.title }}</div>
-        <div class="row text-h6">{{ props.videoMetadata.creator }}</div>
+        <div class="row text-h6">{{ $t('stream.by') }} {{ props.videoMetadata.creator }}</div>
       </q-card-section>
     </q-card-section>
   </q-card>
@@ -31,12 +31,10 @@ import { RoutePaths } from 'src/enums/RoutePaths';
 import {getCoverApiInjectionKey} from 'src/injection-keys';
 import {inject, onMounted, ref} from 'vue';
 import {IGetCoverApi} from 'src/services/apis/get-cover/IGetCoverApi';
-import {useI18n} from 'vue-i18n';
 
 // Helpers
 const getCoverApi: IGetCoverApi | undefined = inject(getCoverApiInjectionKey);
 const router = useRouter();
-const i18n = useI18n();
 
 // Variables
 let cover = ref<string>('');
@@ -57,25 +55,10 @@ function onVideoListing() {
 }
 
 async function loadCover(): Promise<void> {
-  const response: Blob | null = await getCoverApi!.get(props.videoMetadata.id);
+  const response: string | null = await getCoverApi!.get(props.videoMetadata.id);
   if (response) {
-    cover.value = await blobToBase64(response);
+    cover.value = response;
   }
-}
-
-function blobToBase64(blob: Blob): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      if (reader.result) {
-        resolve(reader.result.toString());
-      } else {
-        reject(new Error(i18n.t('error-messages.blob-to-base64')));
-      }
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
 }
 </script>
 

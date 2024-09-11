@@ -19,7 +19,7 @@
 
   "upload.title": "Video-Upload",
   "upload.placeholder.title": "Videotitel",
-  "upload.placeholder.username": "Username",
+  "upload.placeholder.creator": "Ersteller",
   "upload.placeholder.description": "Beschreibung",
   "upload.placeholder.video": "Videodatei (max. 10 MB)",
   "upload.placeholder.cover": "Cover-Bild (max. 2 MB)",

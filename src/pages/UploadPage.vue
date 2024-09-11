@@ -25,7 +25,7 @@
               <q-input
                 ref="usernameRef"
                 v-model="uploadVideoDTO.creator"
-                :placeholder="$t('upload.placeholder.username')"
+                :placeholder="$t('upload.placeholder.creator')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.creator)]"
                 :autofocus="false"
                 required standout

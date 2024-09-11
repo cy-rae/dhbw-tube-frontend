@@ -4,14 +4,14 @@ export class SearchResult{
   videos: VideoMetadataDTO[];
   total: number;
   pages: number;
-  current_page: number;
-  per_page: number;
+  currentPage: number;
+  perPage: number;
 
   constructor() {
     this.videos = [];
     this.total = 0;
     this.pages = 1;
-    this.current_page = 1;
-    this.per_page = 10;
+    this.currentPage = 1;
+    this.perPage = 10;
   }
 }

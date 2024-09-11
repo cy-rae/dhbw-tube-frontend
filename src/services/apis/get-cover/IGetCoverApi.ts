@@ -1,3 +1,3 @@
 export interface IGetCoverApi {
-  get(videoId: string): Promise<Blob | null>;
+  get(videoId: string): Promise<string | null>;
 }
