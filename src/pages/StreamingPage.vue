@@ -7,17 +7,19 @@
 
       <q-scroll-area v-else style="width: 100%; height: 100%">
         <div class="q-mx-auto" style="width: 80%">
-          <q-video
-            :ratio="16/9"
-            :src=videoStreamURL
-          />
+          <video
+            :src="videoStreamURL"
+            controls autoplay style="aspect-ratio: 16 / 9"  class="q-mx-auto full-height full-width"
+          >
+            {{ $t('error-message.cannot-load-video') }}
+          </video>
 
           <div class="text-h5 q-pt-sm">{{ videoMetadata.title }}</div>
-          <div class="row text-bold">
+          <div class="row text-bold full-width">
             <div class="col">
               {{ $t('stream.by') }} {{ videoMetadata.creator }}
             </div>
-            {{$t('stream.uploaded-date')}}: {{ dateService!.getFormattedDate(videoMetadata.upload_date) }}
+            {{ $t('stream.upload-date') }}: {{ dateService!.getFormattedDate(videoMetadata.upload_date) }}
           </div>
         </div>
 
@@ -30,32 +32,28 @@
 
 <script setup lang="ts">
 
-import {inject, onMounted, Ref, ref} from 'vue';
+import {computed, inject, onMounted, Ref, ref} from 'vue';
 import {VideoMetadataDTO} from 'src/dtos/VideoMetadataDTO';
 import {useRoute} from 'vue-router';
-import {dateServiceInjectionKey, getVideoMetadataApiInjectionKey, streamVideoApiInjectionKey} from 'src/injection-keys';
+import {dateServiceInjectionKey, getVideoMetadataApiInjectionKey} from 'src/injection-keys';
 import {IGetVideoMetadataApi} from 'src/services/apis/get-video-metadata/IGetVideoMetadataApi';
-import {IStreamVideoApi} from 'src/services/apis/stream-video/IStreamVideoApi';
 import {IDateService} from 'src/services/date-service/IDateService';
+import {Urls} from 'src/enums/Urls';
 
 // Helpers
 const route = useRoute();
 const getVideoMetadataApi: IGetVideoMetadataApi | undefined = inject(getVideoMetadataApiInjectionKey);
-const streamVideoApi: IStreamVideoApi | undefined = inject(streamVideoApiInjectionKey);
 const dateService: IDateService | undefined = inject(dateServiceInjectionKey);
 
 // Variables
 const videoMetadata: Ref<VideoMetadataDTO | null> = ref(null);
-const videoStreamURL = ref('');
+const videoStreamURL = computed(() =>
+  videoMetadata.value!.id
+    ? Urls.STREAM + '/video/stream/' + videoMetadata.value!.id
+    : ''
+);
 
 onMounted(async () => {
-  await loadVideoMetadata();
-
-  if (videoMetadata.value?.id)
-    await loadVideoStream();
-})
-
-async function loadVideoMetadata() {
   const videoId: string | null = route.query.id as string;
   if (!videoId)
     return;
@@ -65,11 +63,5 @@ async function loadVideoMetadata() {
     return;
 
   videoMetadata.value = response;
-}
-
-async function loadVideoStream() {
-  const response: string | null = await streamVideoApi!.get(videoMetadata.value!.id);
-  if (response)
-    videoStreamURL.value = response;
-}
+});
 </script>

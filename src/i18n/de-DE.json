@@ -3,7 +3,7 @@
   "app.title-1": "DH",
   "app.title-2": "BW Tube",
   "app.institution": "DHBW CAS",
-  "app.date-format": "dd.MM.yyyy HH:mm",
+  "app.date-format": "DD.MM.YYYY HH:mm",
 
   "nav.stream": "Stream",
   "nav.upload": "Upload",

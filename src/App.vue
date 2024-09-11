@@ -10,12 +10,10 @@ import {
   uploadVideoApiInjectionKey,
   getCoverApiInjectionKey,
   getVideoMetadataApiInjectionKey,
-  streamVideoApiInjectionKey,
   searchVideosApiInjectionKey,
   dateServiceInjectionKey
 } from 'src/injection-keys';
 import { GetVideoMetadataApi } from 'src/services/apis/get-video-metadata/GetVideoMetadataApi';
-import { StreamVideoApi } from 'src/services/apis/stream-video/StreamVideoApi';
 import {GetCoverApi} from 'src/services/apis/get-cover/GetCoverApi';
 import {DateService} from 'src/services/date-service/DateService';
 
@@ -29,7 +27,6 @@ provide(uploadVideoApiInjectionKey, new UploadVideoApi());
 // Provide stream API services
 provide(getCoverApiInjectionKey, new GetCoverApi());
 provide(getVideoMetadataApiInjectionKey, new GetVideoMetadataApi());
-provide(streamVideoApiInjectionKey, new StreamVideoApi());
 provide(searchVideosApiInjectionKey, new SearchVideosApi());
 
 // Provide other services

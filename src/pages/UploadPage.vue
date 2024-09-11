@@ -16,11 +16,11 @@
                 :placeholder="$t('upload.placeholder.title')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.title)]"
                 :autofocus="false"
-                required standout
+                required standout maxlength="120"
               />
             </div>
 
-            <!-- USERNAME -->
+            <!-- CREATOR -->
             <div class="col">
               <q-input
                 ref="usernameRef"
@@ -28,7 +28,7 @@
                 :placeholder="$t('upload.placeholder.creator')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.creator)]"
                 :autofocus="false"
-                required standout
+                required standout maxlength="120"
               />
             </div>
           </div>

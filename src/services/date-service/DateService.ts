@@ -6,6 +6,7 @@ export class DateService implements IDateService {
   private i18n = useI18n();
 
   getFormattedDate(dateVal: Date): string {
-    return date.formatDate(dateVal, this.i18n.t('app.date-format'));
+    const format = this.i18n.t('app.date-format')
+    return date.formatDate(dateVal, format);
   }
 }

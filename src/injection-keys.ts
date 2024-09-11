@@ -1,7 +1,6 @@
 import { InjectionKey } from 'vue';
 import { IUploadVideoApi } from 'src/services/apis/upload-video/IUploadVideoApi';
 import { ISearchVideosApi } from 'src/services/apis/search-videos/ISearchVideosApi';
-import { IStreamVideoApi } from 'src/services/apis/stream-video/IStreamVideoApi';
 import { IGetVideoMetadataApi } from 'src/services/apis/get-video-metadata/IGetVideoMetadataApi';
 import {IGetCoverApi} from 'src/services/apis/get-cover/IGetCoverApi';
 import {IDateService} from 'src/services/date-service/IDateService';
@@ -12,7 +11,6 @@ export const uploadVideoApiInjectionKey: InjectionKey<IUploadVideoApi> = Symbol(
 // Stream API service
 export const getCoverApiInjectionKey: InjectionKey<IGetCoverApi> = Symbol('Injection key for API service to get a cover.');
 export const getVideoMetadataApiInjectionKey: InjectionKey<IGetVideoMetadataApi> = Symbol('Injection key for API service to get the metadata of a video.');
-export const streamVideoApiInjectionKey: InjectionKey<IStreamVideoApi> = Symbol('Injection key for API service to stream a video.');
 export const searchVideosApiInjectionKey: InjectionKey<ISearchVideosApi> = Symbol('Injection key for API service to filter videos.');
 
 // Other services

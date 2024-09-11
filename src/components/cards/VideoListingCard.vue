@@ -14,15 +14,13 @@
         />
       </q-card-section>
 
-      <q-separator vertical />
+      <q-separator vertical/>
 
       <q-card-section class="q-pa-none q-my-auto q-pl-md">
         <div class="row text-h5">{{ props.videoListingElement.title }}</div>
-        <div class="row text-h6">
-          <div class="col">
-            {{ $t('stream.by') }} {{ props.videoListingElement.creator }}
-          </div>
-          {{$t('stream.uploaded-date')}}: {{ dateService!.getFormattedDate(videoListingElement.upload_date) }}
+        <div class="row text-h6">{{ $t('stream.by') }} {{ props.videoListingElement.creator }}</div>
+        <div class="row">{{ $t('stream.upload-date') }}:
+          {{ dateService!.getFormattedDate(videoListingElement.upload_date) }}
         </div>
       </q-card-section>
     </q-card-section>
@@ -30,8 +28,8 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { RoutePaths } from 'src/enums/RoutePaths';
+import {useRouter} from 'vue-router';
+import {RoutePaths} from 'src/enums/RoutePaths';
 import {dateServiceInjectionKey, getCoverApiInjectionKey} from 'src/injection-keys';
 import {inject, onMounted, ref} from 'vue';
 import {IGetCoverApi} from 'src/services/apis/get-cover/IGetCoverApi';
