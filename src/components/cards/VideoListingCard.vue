@@ -7,7 +7,7 @@
     <q-card-section horizontal class="q-pa-none q-pl-md">
       <q-card-section class="row justify-evenly items-center q-pa-none" style="width: 250px">
         <img
-          :src="cover"
+          :src="coverStreamURL"
           :alt="$t('search.cover-alt')"
           class="q-px-auto curved-border"
           style="max-height: 150px; max-width: 250px"
@@ -30,20 +30,15 @@
 <script setup lang="ts">
 import {useRouter} from 'vue-router';
 import {RoutePaths} from 'src/enums/RoutePaths';
-import {dateServiceInjectionKey, getCoverApiInjectionKey} from 'src/injection-keys';
-import {inject, onMounted, ref} from 'vue';
-import {IGetCoverApi} from 'src/services/apis/get-cover/IGetCoverApi';
+import {dateServiceInjectionKey} from 'src/injection-keys';
+import {computed, inject} from 'vue';
 import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
 import {IDateService} from 'src/services/date-service/IDateService';
+import {Urls} from 'src/enums/Urls';
 
 // Helpers
 const router = useRouter();
-const getCoverApi = inject(getCoverApiInjectionKey) as IGetCoverApi;
 const dateService = inject(dateServiceInjectionKey) as IDateService;
-
-// Variables
-let cover = ref<string>('');
-
 
 // Properties
 interface Props {
@@ -52,19 +47,15 @@ interface Props {
 
 const props = defineProps<Props>();
 
-onMounted(async () => {
-  await loadCover();
-});
+// Variables
+const coverStreamURL = computed(() =>
+  props.videoListingElement.id
+    ? Urls.STREAM + '/cover/' + props.videoListingElement.id
+    : ''
+);
 
 function onVideoListing() {
   router.push({path: RoutePaths.STREAMING_PAGE, query: {id: props.videoListingElement.id}});
-}
-
-async function loadCover(): Promise<void> {
-  const response: string | null = await getCoverApi.get(props.videoListingElement.id);
-  if (response) {
-    cover.value = response;
-  }
 }
 </script>
 

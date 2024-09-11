@@ -8,14 +8,12 @@ import { SearchVideosApi } from 'src/services/apis/search-videos/SearchVideosApi
 import { provide } from 'vue';
 import {
   uploadVideoApiInjectionKey,
-  getCoverApiInjectionKey,
   getVideoMetadataApiInjectionKey,
   searchVideosApiInjectionKey,
   dateServiceInjectionKey,
   ruleServiceInjectionKey
 } from 'src/injection-keys';
 import { GetVideoMetadataApi } from 'src/services/apis/get-video-metadata/GetVideoMetadataApi';
-import {GetCoverApi} from 'src/services/apis/get-cover/GetCoverApi';
 import {DateService} from 'src/services/date-service/DateService';
 import {RuleService} from 'src/services/rule-service/RuleService';
 
@@ -27,7 +25,6 @@ defineOptions({
 provide(uploadVideoApiInjectionKey, new UploadVideoApi());
 
 // Provide stream API services
-provide(getCoverApiInjectionKey, new GetCoverApi());
 provide(getVideoMetadataApiInjectionKey, new GetVideoMetadataApi());
 provide(searchVideosApiInjectionKey, new SearchVideosApi());
 
