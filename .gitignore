@@ -4,7 +4,8 @@ node_modules
 
 # Quasar core related directories
 .quasar
-/dist
+#TODO: Check if quasar build can be executed before deployment, so the dist folder does not have to be pushed to git
+#/dist
 /quasar.config.*.temporary.compiled*
 
 # Cordova related directories and files
