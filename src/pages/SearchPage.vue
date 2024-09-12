@@ -114,7 +114,7 @@
 
 <script setup lang="ts">
 import {computed, inject, onMounted, Ref, ref} from 'vue';
-import {QInput} from 'quasar';
+import {date, QInput} from 'quasar';
 import {useI18n} from 'vue-i18n';
 import {dateServiceInjectionKey, searchVideosApiInjectionKey} from 'src/injection-keys';
 import {ISearchVideosApi} from 'src/services/apis/search-videos/ISearchVideosApi';
@@ -180,7 +180,7 @@ async function goToPage(page: number) {
 }
 
 async function search() {
-  updateUploadDateInFilter()
+  updateDatesInFilter()
 
   const response: SearchResult | null = await searchVideosApi.get(videoFilterDTO.value);
   if (response) {
@@ -188,13 +188,16 @@ async function search() {
   }
 }
 
-function updateUploadDateInFilter() {
+function updateDatesInFilter() {
   const dateVal = dateService.stringToDate(upload_date.value, dateService.DATE_SHORT_FORMAT());
   if (dateVal) {
-    videoFilterDTO.value.upload_date = dateService.formatDate(dateVal, 'YYYY-MM-DDTHH:mm:ss.sssZ')
-    console.log('upload_date', videoFilterDTO.value.upload_date);
+    const startOfDay = date.startOfDate(dateVal, 'day');
+    videoFilterDTO.value.start_date = dateService.formatDate(startOfDay, 'YYYY-MM-DDTHH:mm:ss.sssZ')
+
+    const endOfDay = date.endOfDate(dateVal, 'day');
+    videoFilterDTO.value.end_date = dateService.formatDate(endOfDay, 'YYYY-MM-DDTHH:mm:ss.sssZ')
   } else {
-    videoFilterDTO.value.upload_date = '';
+    videoFilterDTO.value.start_date = '';
   }
 }
 </script>
