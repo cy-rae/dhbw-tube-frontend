@@ -11,3 +11,12 @@
 
   padding: 0 0 16px;
 }
+
+.search-bar {
+  width: 100%;
+  max-height: var(--search-bar-height);
+  height: var(--search-bar-height);
+  min-height: var(--search-bar-height);
+
+  padding: 0 0 16px;
+}

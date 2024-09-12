@@ -67,7 +67,8 @@
           </div>
         </div>
 
-        <q-scroll-area style="width: 100%; height: calc(100% - var(--page-title-height))">
+        <q-scroll-area
+          style="width: 100%; height: calc(100% - var(--page-title-height) - var(--search-bar-height) - var(--search-pagination-height))">
           <div v-if="searchResult.videos.length <= 0" class="row justify-center items-center full-height text-h6">
             {{ $t('search.no-videos') }}
           </div>
@@ -80,6 +81,32 @@
             </div>
           </div>
         </q-scroll-area>
+
+        <div class="row q-col-gutter-sm">
+          <div class="col"/>
+          <div class="text-bold">
+            <q-btn
+              :disable="searchResult.currentPage == 1"
+              @click="goToPage(searchResult.currentPage - 1)"
+              icon="arrow_back" color="primary" round class="q-pl-none" unelevated size="sm" dense
+            />
+
+            {{ searchResult.currentPage }} / {{ searchResult.pages }}
+
+            <q-btn
+              :disable="searchResult.currentPage == searchResult.pages"
+              @click="goToPage(searchResult.currentPage + 1)"
+              icon="arrow_forward" color="primary" round class="q-pl-none" unelevated size="sm" dense
+            />
+          </div>
+          <q-select
+            v-model="videoFilterDTO.per_page"
+            :options="perPageOptions"
+            @update:model-value="goToPage(1)"
+            standout dense class="q-my-auto"
+          />
+        </div>
+
       </q-card-section>
     </q-card>
   </q-page>
@@ -117,6 +144,7 @@ const orderOptions = computed(() => [
   Order.ASC,
   Order.DESC
 ]);
+const perPageOptions = computed(() => [5, 10, 15, 20, 25, 30]);
 
 onMounted(async () => {
   await search();
@@ -146,14 +174,27 @@ function getOrderLabel(value: Order) {
   }
 }
 
+async function goToPage(page: number) {
+  videoFilterDTO.value.page = page;
+  await search();
+}
+
 async function search() {
-  const dateVal = dateService.stringToDate(upload_date.value, dateService.DATE_SHORT_FORMAT());
-  videoFilterDTO.value.upload_date = dateService.formatDate(dateVal, dateService.DATE_BACKEND_FORMAT);
+  updateUploadDateInFilter()
 
   const response: SearchResult | null = await searchVideosApi.get(videoFilterDTO.value);
   if (response) {
     searchResult.value = response;
-    console.log(searchResult.value);
+  }
+}
+
+function updateUploadDateInFilter() {
+  const dateVal = dateService.stringToDate(upload_date.value, dateService.DATE_SHORT_FORMAT());
+  if (dateVal) {
+    videoFilterDTO.value.upload_date = dateService.formatDate(dateVal, 'YYYY-MM-DDTHH:mm:ss.sssZ')
+    console.log('upload_date', videoFilterDTO.value.upload_date);
+  } else {
+    videoFilterDTO.value.upload_date = '';
   }
 }
 </script>
