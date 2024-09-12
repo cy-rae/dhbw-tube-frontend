@@ -44,6 +44,9 @@
   "upload.label.upload": "Upload",
   "upload.label.reset": "Zurücksetzen",
 
+  "not-found-page.message": "Die Seite konnte nicht gefunden werden.",
+  "not-found-page.back-to-homepage": "Zurück zur Homepage",
+
   "rule.empty-field": "Bitte füllen Sie dieses Feld aus.",
   "rule.enter-valid-date": "Bitte geben Sie ein Datum ein (DD.MM.JJJJ).",
 

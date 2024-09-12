@@ -44,6 +44,9 @@
   "upload.label.upload": "Upload",
   "upload.label.reset": "Reset",
 
+  "not-found-page.message": "The page could not be found.",
+  "not-found-page.back-to-homepage": "Back to homepage",
+
   "rule.empty-field": "Please fill in this field.",
 
   "message.upload-video": "The video was uploaded successfully.",
