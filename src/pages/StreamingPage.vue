@@ -38,7 +38,7 @@ import {useRoute} from 'vue-router';
 import {dateServiceInjectionKey, getVideoMetadataApiInjectionKey} from 'src/injection-keys';
 import {IGetVideoMetadataApi} from 'src/services/apis/get-video-metadata/IGetVideoMetadataApi';
 import {IDateService} from 'src/services/date-service/IDateService';
-import {Urls} from 'src/enums/Urls';
+import {BaseUrls} from 'src/enums/BaseUrls';
 
 // Helpers
 const route = useRoute();
@@ -49,7 +49,7 @@ const dateService = inject(dateServiceInjectionKey) as IDateService;
 const videoMetadata: Ref<VideoMetadataDTO | null> = ref(null);
 const videoStreamURL = computed(() =>
   videoMetadata.value!.id
-    ? Urls.STREAM + '/video/stream/' + videoMetadata.value!.id
+    ? BaseUrls.STREAM + '/video/stream/' + videoMetadata.value!.id
     : ''
 );
 

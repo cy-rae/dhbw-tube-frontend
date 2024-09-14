@@ -1,6 +1,5 @@
 import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
-import {Urls} from 'src/enums/Urls';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -15,25 +14,7 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'http://localhost:5001' }); // TODO: Change this to your API URL
-
-// Add a request interceptor
-api.interceptors.request.use(
-  config => {
-    // Modify the baseURL based on the request URL
-    switch (config.url){
-      case '/upload':
-        config.baseURL = Urls.UPLOAD;
-        break;
-      default:
-        config.baseURL = Urls.STREAM;
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
+const api = axios.create({ baseURL: '' });
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
