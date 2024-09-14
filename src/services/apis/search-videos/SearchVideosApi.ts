@@ -3,17 +3,16 @@ import { VideoFilterDTO } from 'src/dtos/VideoFilterDTO';
 import { ISearchVideosApi } from 'src/services/apis/search-videos/ISearchVideosApi';
 import { useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
-import { api } from 'boot/axios';
+import { streamApi } from 'boot/axios';
 import { SearchResult } from 'src/dtos/SearchResult';
 import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
-import { BaseUrls } from 'src/enums/BaseUrls';
 
 export class SearchVideosApi implements ISearchVideosApi {
   private q = useQuasar();
   private i18n = useI18n();
 
   async get(filter: VideoFilterDTO): Promise<SearchResult | null> {
-    const response: AxiosResponse = await api.get(BaseUrls.STREAM + '/videos/search', {
+    const response: AxiosResponse = await streamApi.get('/videos/search', {
       params: filter,
     });
 

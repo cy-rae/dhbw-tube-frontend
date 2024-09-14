@@ -34,7 +34,7 @@ import {dateServiceInjectionKey} from 'src/injection-keys';
 import {computed, inject} from 'vue';
 import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
 import {IDateService} from 'src/services/date-service/IDateService';
-import {BaseUrls} from 'src/enums/BaseUrls';
+import { streamApi } from 'boot/axios';
 
 // Helpers
 const router = useRouter();
@@ -50,7 +50,7 @@ const props = defineProps<Props>();
 // Variables
 const coverStreamURL = computed(() =>
   props.videoListingElement.id
-    ? BaseUrls.STREAM + '/cover/' + props.videoListingElement.id
+    ? streamApi.defaults.baseURL + '/cover/' + props.videoListingElement.id
     : ''
 );
 
