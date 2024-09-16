@@ -37,7 +37,7 @@ This component realizes the upload page in which a user can upload a video with 
           </div>
 
           <div class="row q-col-gutter-md q-pt-md">
-            <!-- VIDEO UPLOAD (max. 10GB) -->
+            <!-- VIDEO UPLOAD (max. 6GB) -->
             <div class="col">
               <q-file
                 ref="videoRef"
@@ -45,7 +45,7 @@ This component realizes the upload page in which a user can upload a video with 
                 :label="$t('upload.placeholder.video')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.video)]"
                 @rejected="onFileRejected"
-                accept="video/*" max-file-size="10737418240"
+                accept="video/*" max-file-size="6442450944"
                 standout clearable
               >
                 <template v-slot:prepend>

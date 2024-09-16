@@ -39,7 +39,7 @@
   "upload.placeholder.title": "Videotitel",
   "upload.placeholder.creator": "Ersteller",
   "upload.placeholder.description": "Beschreibung",
-  "upload.placeholder.video": "Videodatei (max. 10 GB)",
+  "upload.placeholder.video": "Videodatei (max. 6 GB)",
   "upload.placeholder.cover": "Cover-Bild (max. 10 MB)",
   "upload.label.upload": "Upload",
   "upload.label.reset": "Zurücksetzen",
