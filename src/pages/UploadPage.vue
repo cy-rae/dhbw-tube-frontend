@@ -78,7 +78,7 @@ This component realizes the upload page in which a user can upload a video with 
               v-model="uploadVideoDTO.description"
               :placeholder="$t('upload.placeholder.description')"
               :autofocus="false"
-              standout type="textarea" class="full-width" maxlength="20000"
+              standout type="textarea" class="full-width" maxlength="5000"
             />
           </div>
         </q-form>
