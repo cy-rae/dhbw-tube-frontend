@@ -1,3 +1,6 @@
+<!--
+This component realizes the upload page in which a user can upload a video with a cover, title, creator name and description.
+-->
 <template>
   <q-page class="row items-center justify-evenly">
     <q-card>
@@ -34,7 +37,7 @@
           </div>
 
           <div class="row q-col-gutter-md q-pt-md">
-            <!-- VIDEO -->
+            <!-- VIDEO UPLOAD (max. 10GB) -->
             <div class="col">
               <q-file
                 ref="videoRef"
@@ -42,16 +45,16 @@
                 :label="$t('upload.placeholder.video')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.video)]"
                 @rejected="onFileRejected"
-                accept="video/*" max-file-size="10485760"
+                accept="video/*" max-file-size="10737418240"
                 standout clearable
               >
                 <template v-slot:prepend>
-                  <q-icon name="attach_file"/>
+                  <q-icon name="attach_file" />
                 </template>
               </q-file>
             </div>
 
-            <!-- COVER -->
+            <!-- COVER UPLOAD (max. 10MB) -->
             <div class="col">
               <q-file
                 ref="coverRef"
@@ -59,11 +62,11 @@
                 :label="$t('upload.placeholder.cover')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.cover)]"
                 @rejected="onFileRejected"
-                accept="image/*" max-file-size="2097152"
+                accept="image/*" max-file-size="10485760"
                 standout clearable
               >
                 <template v-slot:prepend>
-                  <q-icon name="attach_file"/>
+                  <q-icon name="attach_file" />
                 </template>
               </q-file>
             </div>
@@ -75,13 +78,13 @@
               v-model="uploadVideoDTO.description"
               :placeholder="$t('upload.placeholder.description')"
               :autofocus="false"
-              standout type="textarea" class="full-width"
+              standout type="textarea" class="full-width" maxlength="20000"
             />
           </div>
         </q-form>
       </q-card-section>
 
-      <q-separator class="q-my-md"/>
+      <q-separator class="q-my-md" />
 
       <q-card-actions align="center" class="q-pa-none">
         <q-btn
@@ -101,13 +104,13 @@
 </template>
 
 <script setup lang="ts">
-import {QFile, QForm, QInput, useQuasar} from 'quasar';
-import {inject, reactive, Ref, ref} from 'vue';
-import {UploadVideoDTO} from 'src/dtos/UploadVideoDTO';
-import {ruleServiceInjectionKey, uploadVideoApiInjectionKey} from 'src/injection-keys';
-import {IUploadVideoApi} from 'src/services/apis/upload-video/IUploadVideoApi';
-import {useI18n} from 'vue-i18n';
-import {IRuleService} from 'src/services/rule-service/IRuleService';
+import { QFile, QForm, QInput, useQuasar } from 'quasar';
+import { inject, reactive, Ref, ref } from 'vue';
+import { UploadVideoDTO } from 'src/dtos/UploadVideoDTO';
+import { ruleServiceInjectionKey, uploadVideoApiInjectionKey } from 'src/injection-keys';
+import { IUploadVideoApi } from 'src/services/apis/upload-video/IUploadVideoApi';
+import { useI18n } from 'vue-i18n';
+import { IRuleService } from 'src/services/rule-service/IRuleService';
 
 // Helpers
 const q = useQuasar();

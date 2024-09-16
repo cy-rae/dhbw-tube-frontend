@@ -1,3 +1,7 @@
+<!--
+This component realizes the search page in which a user can search for videos. The search results are displayed in a list.
+The user can filter the search results by title, creator and upload date and sort the results.
+-->
 <template>
   <q-page class="row items-center justify-evenly">
     <q-card class="row items-center justify-evenly" style="height: calc(80vh - var(--header-height))">
@@ -75,15 +79,15 @@
 
           <div v-else>
             <div v-for="videoListingElement in searchResult.videos" :key="videoListingElement.id">
-              <video-listing-card :video-listing-element="videoListingElement"/>
+              <video-listing-card :video-listing-element="videoListingElement" />
 
-              <div v-if="videoListingElement !== searchResult.videos[searchResult.videos.length - 1]" class="q-pb-md"/>
+              <div v-if="videoListingElement !== searchResult.videos[searchResult.videos.length - 1]" class="q-pb-md" />
             </div>
           </div>
         </q-scroll-area>
 
         <div class="row q-col-gutter-sm">
-          <div class="col"/>
+          <div class="col" />
           <div class="text-bold">
             <q-btn
               :disable="searchResult.currentPage == 1"
@@ -113,18 +117,18 @@
 </template>
 
 <script setup lang="ts">
-import {computed, inject, onMounted, Ref, ref} from 'vue';
-import {date, QInput} from 'quasar';
-import {useI18n} from 'vue-i18n';
-import {dateServiceInjectionKey, searchVideosApiInjectionKey} from 'src/injection-keys';
-import {ISearchVideosApi} from 'src/services/apis/search-videos/ISearchVideosApi';
+import { computed, inject, onMounted, Ref, ref } from 'vue';
+import { date, QInput } from 'quasar';
+import { useI18n } from 'vue-i18n';
+import { dateServiceInjectionKey, searchVideosApiInjectionKey } from 'src/injection-keys';
+import { ISearchVideosApi } from 'src/services/apis/search-videos/ISearchVideosApi';
 import VideoListingCard from 'components/cards/VideoListingCard.vue';
-import {VideoFilterDTO} from 'src/dtos/VideoFilterDTO';
-import {SearchResult} from 'src/dtos/SearchResult';
+import { VideoFilterDTO } from 'src/dtos/VideoFilterDTO';
+import { SearchResult } from 'src/dtos/SearchResult';
 import DateInput from 'components/inputs/DateInput.vue';
-import {IDateService} from 'src/services/date-service/IDateService';
-import {Order} from 'src/enums/Order';
-import {SortByProps} from 'src/enums/SortByProps';
+import { IDateService } from 'src/services/date-service/IDateService';
+import { Order } from 'src/enums/Order';
+import { SortByProps } from 'src/enums/SortByProps';
 
 // Helpers
 const i18n = useI18n();
@@ -180,7 +184,7 @@ async function goToPage(page: number) {
 }
 
 async function search() {
-  updateDatesInFilter()
+  updateDatesInFilter();
 
   const response: SearchResult | null = await searchVideosApi.get(videoFilterDTO.value);
   if (response) {
@@ -192,10 +196,10 @@ function updateDatesInFilter() {
   const dateVal = dateService.stringToDate(upload_date.value, dateService.DATE_SHORT_FORMAT());
   if (dateVal) {
     const startOfDay = date.startOfDate(dateVal, 'day');
-    videoFilterDTO.value.start_date = dateService.formatDate(startOfDay, 'YYYY-MM-DDTHH:mm:ss.sssZ')
+    videoFilterDTO.value.start_date = dateService.formatDate(startOfDay, 'YYYY-MM-DDTHH:mm:ss.sssZ');
 
     const endOfDay = date.endOfDate(dateVal, 'day');
-    videoFilterDTO.value.end_date = dateService.formatDate(endOfDay, 'YYYY-MM-DDTHH:mm:ss.sssZ')
+    videoFilterDTO.value.end_date = dateService.formatDate(endOfDay, 'YYYY-MM-DDTHH:mm:ss.sssZ');
   } else {
     videoFilterDTO.value.start_date = '';
   }

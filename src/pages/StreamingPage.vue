@@ -1,3 +1,6 @@
+<!--
+This component realizes the streaming page in which a user can watch a video. Under the video, the title, creator, upload date and description are displayed.
+-->
 <template>
   <q-page class="row items-center justify-evenly">
     <q-card class="row items-center justify-evenly" style="height: calc(80vh - var(--header-height))">
@@ -32,12 +35,12 @@
 
 <script setup lang="ts">
 
-import {computed, inject, onMounted, Ref, ref} from 'vue';
-import {VideoMetadataDTO} from 'src/dtos/VideoMetadataDTO';
-import {useRoute} from 'vue-router';
-import {dateServiceInjectionKey, getVideoMetadataApiInjectionKey} from 'src/injection-keys';
-import {IGetVideoMetadataApi} from 'src/services/apis/get-video-metadata/IGetVideoMetadataApi';
-import {IDateService} from 'src/services/date-service/IDateService';
+import { computed, inject, onMounted, Ref, ref } from 'vue';
+import { VideoMetadataDTO } from 'src/dtos/VideoMetadataDTO';
+import { useRoute } from 'vue-router';
+import { dateServiceInjectionKey, getVideoMetadataApiInjectionKey } from 'src/injection-keys';
+import { IGetVideoMetadataApi } from 'src/services/apis/get-video-metadata/IGetVideoMetadataApi';
+import { IDateService } from 'src/services/date-service/IDateService';
 import { streamApi } from 'boot/axios';
 
 // Helpers
