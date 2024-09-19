@@ -59,8 +59,7 @@ export class UploadVideoApi implements IUploadVideoApi {
         });
       }
     } catch (error) {
-      // If an error occurred, log and show a message
-      console.log(this.i18n.t('error-message.upload-video-without-error-code') + '\n' + error);
+      // If an error occurred, show a message
       this.q.notify({
         type: 'negative',
         message: this.i18n.t('error-message.upload-video-without-error-code'),
