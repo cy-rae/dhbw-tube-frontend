@@ -37,7 +37,7 @@ This component realizes the upload page in which a user can upload a video with 
           </div>
 
           <div class="row q-col-gutter-md q-pt-md">
-            <!-- VIDEO UPLOAD (max. 6GB) -->
+            <!-- VIDEO UPLOAD (max. 4GB) -->
             <div class="col">
               <q-file
                 ref="videoRef"
@@ -45,7 +45,7 @@ This component realizes the upload page in which a user can upload a video with 
                 :label="$t('upload.placeholder.video')"
                 :rules="[() => ruleService.isSet(uploadVideoDTO.video)]"
                 @rejected="onFileRejected"
-                accept="video/*" max-file-size="6442450944"
+                accept="video/*" max-file-size="4294967296"
                 standout clearable
               >
                 <template v-slot:prepend>
@@ -128,6 +128,11 @@ const coverRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 const uploadVideoDTO = reactive(new UploadVideoDTO());
 
 async function onUpload(): Promise<void> {
+  q.loading.show({
+      message: i18n.t('upload.uploading-video'),
+      delay: 400
+    }
+  );
   const isTitleValid = titleRef.value?.validate();
   const isUsernameValid = creatorRef.value?.validate();
   const isVideoValid = videoRef.value?.validate();
@@ -138,6 +143,7 @@ async function onUpload(): Promise<void> {
   }
 
   await uploadVideoApi.post(uploadVideoDTO);
+  q.loading.hide();
 }
 
 function onFileRejected(): void {

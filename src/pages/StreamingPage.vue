@@ -12,7 +12,7 @@ This component realizes the streaming page in which a user can watch a video. Un
         <div class="q-mx-auto" style="width: 80%">
           <video
             :src="videoStreamURL"
-            controls autoplay style="aspect-ratio: 16 / 9" class="q-mx-auto full-height full-width"
+            controls autoplay style="aspect-ratio: 16 / 9; max-height: 50vh" class="q-mx-auto full-height full-width"
           >
             {{ $t('error-message.cannot-load-video') }}
           </video>
