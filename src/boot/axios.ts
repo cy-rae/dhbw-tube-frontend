@@ -14,6 +14,8 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
+
+// Define base urls upload and stream api requests.
 const uploadApi = axios.create({ baseURL: 'http://localhost/upload-api' });
 const streamApi = axios.create({ baseURL: 'http://localhost/stream-api' });
 

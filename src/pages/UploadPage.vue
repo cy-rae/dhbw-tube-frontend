@@ -8,10 +8,11 @@ This component realizes the upload page in which a user can upload a video with 
         {{ $t('upload.title') }}
       </q-card-section>
 
+      <!-- Upload Form -->
       <q-card-section class="q-pa-none">
         <q-form class="q-gutter-md">
           <div class="row q-col-gutter-md">
-            <!-- TITLE -->
+            <!-- Title -->
             <div class="col">
               <q-input
                 ref="titleRef"
@@ -23,7 +24,7 @@ This component realizes the upload page in which a user can upload a video with 
               />
             </div>
 
-            <!-- CREATOR -->
+            <!-- Creator -->
             <div class="col">
               <q-input
                 ref="creatorRef"
@@ -37,7 +38,7 @@ This component realizes the upload page in which a user can upload a video with 
           </div>
 
           <div class="row q-col-gutter-md q-pt-md">
-            <!-- VIDEO UPLOAD (max. 4GB) -->
+            <!-- Video Upload (max. 4GB) -->
             <div class="col">
               <q-file
                 ref="videoRef"
@@ -54,7 +55,7 @@ This component realizes the upload page in which a user can upload a video with 
               </q-file>
             </div>
 
-            <!-- COVER UPLOAD (max. 10MB) -->
+            <!-- Cover Upload (max. 10MB) -->
             <div class="col">
               <q-file
                 ref="coverRef"
@@ -72,7 +73,7 @@ This component realizes the upload page in which a user can upload a video with 
             </div>
           </div>
 
-          <!-- DESCRIPTION -->
+          <!-- Description -->
           <div class="row q-col-gutter-md q-pt-md">
             <q-input
               v-model="uploadVideoDTO.description"
@@ -86,6 +87,7 @@ This component realizes the upload page in which a user can upload a video with 
 
       <q-separator class="q-my-md" />
 
+      <!-- Upload & Reset Buttons -->
       <q-card-actions align="center" class="q-pa-none">
         <q-btn
           :label="$t('upload.label.reset')"
@@ -127,25 +129,28 @@ const coverRef: Ref<InstanceType<typeof QFile> | null> = ref(null);
 // Models
 const uploadVideoDTO = reactive(new UploadVideoDTO());
 
+/**
+ * Uploads the video to the server.
+ */
 async function onUpload(): Promise<void> {
-  q.loading.show({
-      message: i18n.t('upload.uploading-video'),
-      delay: 400
-    }
-  );
+  // Get the upload form values
   const isTitleValid = titleRef.value?.validate();
   const isUsernameValid = creatorRef.value?.validate();
   const isVideoValid = videoRef.value?.validate();
   const isCoverValid = coverRef.value?.validate();
 
+  // Check if the form is valid
   if (!isTitleValid || !isUsernameValid || !isVideoValid || !isCoverValid || !uploadVideoDTO.video || !uploadVideoDTO.cover) {
     return;
   }
 
+  // Upload the video
   await uploadVideoApi.post(uploadVideoDTO);
-  q.loading.hide();
 }
 
+/**
+ * Notifies the user that the file was rejected.
+ */
 function onFileRejected(): void {
   q.notify({
     type: 'negative',

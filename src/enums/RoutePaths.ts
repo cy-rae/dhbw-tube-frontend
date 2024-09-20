@@ -1,3 +1,6 @@
+/**
+ * Enum for route paths
+ */
 export enum RoutePaths {
   MAIN = '/',
   SEARCH_PAGE = MAIN + 'search/',

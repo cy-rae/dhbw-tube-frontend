@@ -9,9 +9,15 @@ export class GetVideoMetadataApi implements IGetVideoMetadataApi {
   private q = useQuasar();
   private i18n = useI18n();
 
+  /**
+   * Get the metadata of a video by its ID.
+   * @param id The ID of the video to get the metadata of.
+   */
   async get(id: string): Promise<VideoMetadataDTO | null> {
+    // Make the request to the API
     const response: AxiosResponse = await streamApi.get('/video/' + id);
 
+    // Check if the request was successful. If not, show an error message and return null.
     if (response.status != HttpStatusCode.Ok) {
       this.q.notify({
         type: 'negative',
@@ -21,9 +27,15 @@ export class GetVideoMetadataApi implements IGetVideoMetadataApi {
       return null;
     }
 
+    // Convert the response to a VideoMetadataDTO object and return it
     return this.convertToVideoMetadataDTO(response);
   }
 
+  /**
+   * Convert the response from the API to a VideoMetadataDTO object.
+   * @param response The response from the API.
+   * @private
+   */
   private convertToVideoMetadataDTO(response: AxiosResponse) {
     const videoMetadata = new VideoMetadataDTO();
     videoMetadata.id = response.data['id'];

@@ -1,3 +1,6 @@
+/**
+ * Data Transfer Object for uploading a video
+ */
 export class UploadVideoDTO {
   title: string;
   creator: string;

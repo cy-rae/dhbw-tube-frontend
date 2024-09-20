@@ -1,6 +1,9 @@
 import {VideoListingElementDTO} from 'src/dtos/VideoListingElementDTO';
 
-export class SearchResult{
+/**
+ * This class represents the result of a search query.
+ */
+export class SearchResultDTO {
   videos: VideoListingElementDTO[];
   total: number;
   pages: number;

@@ -23,10 +23,12 @@ declare module 'vue-i18n' {
 /* eslint-enable @typescript-eslint/no-empty-interface */
 
 export default boot(({ app }) => {
+  // Use english if the browser language is not german.
   let locale = Locale.EN;
   if(Locale.DE.includes(navigator.language))
     locale = Locale.DE;
 
+  // Create a new i18n instance
   const i18n = createI18n({
     locale: locale,
     legacy: false,

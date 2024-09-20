@@ -9,6 +9,7 @@ The user can filter the search results by title, creator and upload date and sor
         {{ $t('search.title') }}
       </q-card-section>
 
+      <!-- FILTERS FROM -->
       <q-card-section class="full-height full-width q-pa-none">
         <div class="row q-col-gutter-sm q-pb-md">
           <!-- TITLE -->
@@ -43,7 +44,7 @@ The user can filter the search results by title, creator and upload date and sor
           <!-- SORT BY -->
           <div class="col select-size">
             <q-select
-              v-model="videoFilterDTO.sortBy"
+              v-model="videoFilterDTO.sort_by"
               :options="sortByOptions"
               :option-label="getSortByLabel"
               :label="$t('search.filter.sort-by')"
@@ -71,6 +72,7 @@ The user can filter the search results by title, creator and upload date and sor
           </div>
         </div>
 
+        <!-- SEARCH RESULTS -->
         <q-scroll-area
           style="width: 100%; height: calc(100% - var(--page-title-height) - var(--search-bar-height) - var(--search-pagination-height))">
           <div v-if="searchResult.videos.length <= 0" class="row justify-center items-center full-height text-h6">
@@ -86,6 +88,7 @@ The user can filter the search results by title, creator and upload date and sor
           </div>
         </q-scroll-area>
 
+        <!-- PAGINATION -->
         <div class="row q-col-gutter-sm">
           <div class="col" />
           <div class="text-bold">
@@ -124,7 +127,7 @@ import { dateServiceInjectionKey, searchVideosApiInjectionKey } from 'src/inject
 import { ISearchVideosApi } from 'src/services/apis/search-videos/ISearchVideosApi';
 import VideoListingCard from 'components/cards/VideoListingCard.vue';
 import { VideoFilterDTO } from 'src/dtos/VideoFilterDTO';
-import { SearchResult } from 'src/dtos/SearchResult';
+import { SearchResultDTO } from 'src/dtos/SearchResultDTO';
 import DateInput from 'components/inputs/DateInput.vue';
 import { IDateService } from 'src/services/date-service/IDateService';
 import { Order } from 'src/enums/Order';
@@ -136,7 +139,7 @@ const searchVideosApi = inject(searchVideosApiInjectionKey) as ISearchVideosApi;
 const dateService = inject(dateServiceInjectionKey) as IDateService;
 
 // Variables
-const searchResult: Ref<SearchResult> = ref(new SearchResult());
+const searchResult: Ref<SearchResultDTO> = ref(new SearchResultDTO());
 const videoFilterDTO = ref(new VideoFilterDTO());
 const upload_date = ref('');
 const sortByOptions = computed(() => [
@@ -154,6 +157,10 @@ onMounted(async () => {
   await search();
 });
 
+/**
+ * Returns the label for the sort-by dropdown.
+ * @param value The value of the sort-by dropdown.
+ */
 function getSortByLabel(value: SortByProps) {
   switch (value) {
     case SortByProps.TITLE:
@@ -167,6 +174,10 @@ function getSortByLabel(value: SortByProps) {
   }
 }
 
+/**
+ * Returns the label for the order dropdown.
+ * @param value The value of the order dropdown.
+ */
 function getOrderLabel(value: Order) {
   switch (value) {
     case Order.ASC:
@@ -178,20 +189,32 @@ function getOrderLabel(value: Order) {
   }
 }
 
+/**
+ * Navigates to the given page of the result list.
+ * @param page Index of the target page of the result list.
+ */
 async function goToPage(page: number) {
   videoFilterDTO.value.page = page;
   await search();
 }
 
+/**
+ * Searches for videos based on the filter.
+ */
 async function search() {
+  // Update the dates in the filter so that the server can filter by the upload date.
   updateDatesInFilter();
 
-  const response: SearchResult | null = await searchVideosApi.get(videoFilterDTO.value);
+  // Get the search result from the server.
+  const response: SearchResultDTO | null = await searchVideosApi.get(videoFilterDTO.value);
   if (response) {
     searchResult.value = response;
   }
 }
 
+/**
+ * Updates the start and end date in the filter based on the selected date.
+ */
 function updateDatesInFilter() {
   const dateVal = dateService.stringToDate(upload_date.value, dateService.DATE_SHORT_FORMAT());
   if (dateVal) {

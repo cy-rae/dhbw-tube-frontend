@@ -46,6 +46,7 @@ The application can be deployed on a Kubernetes cluster. A Dockerfile is provide
 
 The Dockerfile installs an nginx server which hosts the web app. Only the production build files are copied to the nginx server to reduce the image size and improve build times.
 Therefore, `quasar build` must be executed before building the Docker image.
+Moreover, the Dockerfile exposes the port 80, so the web app can be accessed outside the container.
 
 An nginx configuration file should be provided by the Kubernetes pod so the outgoing REST-API requests are redirected to the correct backend services.
 The following paths must be redirected to the corresponding backend services:

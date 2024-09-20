@@ -11,6 +11,14 @@ export class UploadVideoApi implements IUploadVideoApi {
   private uploadProgress = 0;
 
   async post(uploadVideoDTO: UploadVideoDTO): Promise<void> {
+    // Show a loading message
+    this.q.loading.show({
+        message: this.i18n.t('upload.uploading-video'),
+        delay: 400
+      }
+    );
+
+    // Create a new FormData object and append the data to it
     const formData = new FormData();
     formData.append('title', uploadVideoDTO.title);
     formData.append('creator', uploadVideoDTO.creator);
@@ -19,21 +27,24 @@ export class UploadVideoApi implements IUploadVideoApi {
     formData.append('cover', uploadVideoDTO.cover!);
 
     try {
+      // Send the request to the server
       const response: AxiosResponse = await uploadApi.post('/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
+
+        // Callback function to track the upload progress
         onUploadProgress: (progressEvent: AxiosProgressEvent) => {
           this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total!);
 
           if(this.uploadProgress < 100) {
-            // Update the loading message
+            // Show the upload progress
             this.q.loading.show({
               message: this.i18n.t('upload.uploading-video') + ' ' + this.uploadProgress + '%',
               html: true
             });
           } else {
-            // Hide the loading message
+            // Show that the video is being stored
             this.q.loading.show(
               {
                 message: this.i18n.t('upload.storing-video'),
@@ -67,6 +78,7 @@ export class UploadVideoApi implements IUploadVideoApi {
       });
     }
 
+    // Reset the upload progress and hide the loading message
     this.uploadProgress = 0;
     this.q.loading.hide();
   }

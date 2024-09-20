@@ -1,6 +1,9 @@
 import {useI18n} from 'vue-i18n';
 import {Locale} from 'src/enums/Locale';
 
+/**
+ * This class can be used in a calendar component to provide the locale-specific date options.
+ */
 export class LocaleDateOption {
   private _i18n = useI18n({useScope: 'global'});
 

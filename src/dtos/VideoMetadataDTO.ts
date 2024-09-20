@@ -1,3 +1,6 @@
+/**
+ * This class represents the metadata of a video.
+ */
 export class VideoMetadataDTO {
   id: string;
   title: string;

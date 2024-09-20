@@ -4,6 +4,7 @@
     v-ripple
     class="video-listing-card full-width cursor-pointer q-hoverable"
   >
+    <!-- Cover Image - The img component sends requests to the passed API URL automatically to stream the image. -->
     <q-card-section horizontal class="q-pa-none q-pl-md">
       <q-card-section class="row justify-evenly items-center q-pa-none" style="width: 250px">
         <img
@@ -16,6 +17,7 @@
 
       <q-separator vertical/>
 
+      <!-- Video Information -->
       <q-card-section class="q-pa-none q-my-auto q-pl-md">
         <div class="row text-h5">{{ props.videoListingElement.title }}</div>
         <div class="row text-h6">{{ $t('stream.by') }} {{ props.videoListingElement.creator }}</div>

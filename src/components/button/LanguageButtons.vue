@@ -1,12 +1,16 @@
 <template>
   <div class="row text-accent">
-      <q-btn
-        :label="$t('locale.en')"
-        :class="enStyle"
-        @click="onLanguage(Locale.EN)"
-        round unelevated
-      />
+    <!-- English -->
+    <q-btn
+      :label="$t('locale.en')"
+      :class="enStyle"
+      @click="onLanguage(Locale.EN)"
+      round unelevated
+    />
+
     <div class="q-my-auto ">I</div>
+
+    <!-- German -->
     <q-btn
       :label="$t('locale.de')"
       :class="deStyle"
@@ -23,6 +27,7 @@ import { computed, ComputedRef } from 'vue';
 
 const i18n = useI18n();
 
+// Styles for the language buttons that are dependent on the current selected language
 const enStyle: ComputedRef<string> = computed(() => {
   if (i18n.locale.value !== Locale.DE.toString())
     return 'q-my-auto text-bold text-primary';
@@ -36,6 +41,10 @@ const deStyle: ComputedRef<string> = computed(() => {
     return 'q-my-auto';
 });
 
+/**
+ * If the user clicks on a language button, the language will be changed.
+ * @param locale The language abbreviation to change to.
+ */
 function onLanguage(locale: Locale): void {
   i18n.locale.value = locale;
 }

@@ -1,3 +1,6 @@
+/**
+ * Data Transfer Object for Video Listing Element
+ */
 export class VideoListingElementDTO {
   id: string;
   title: string;

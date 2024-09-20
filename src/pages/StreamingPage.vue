@@ -9,6 +9,7 @@ This component realizes the streaming page in which a user can watch a video. Un
       </div>
 
       <q-scroll-area v-else style="width: 100%; height: 100%">
+        <!-- Video Stream - The video component requests a range of file content automatically with the passed URL. -->
         <div class="q-mx-auto" style="width: 80%">
           <video
             :src="videoStreamURL"
@@ -17,6 +18,7 @@ This component realizes the streaming page in which a user can watch a video. Un
             {{ $t('error-message.cannot-load-video') }}
           </video>
 
+          <!-- Title, Creator, Upload Date -->
           <div class="text-h5 q-pt-sm">{{ videoMetadata.title }}</div>
           <div class="row text-bold full-width">
             <div class="col">
@@ -26,6 +28,7 @@ This component realizes the streaming page in which a user can watch a video. Un
           </div>
         </div>
 
+        <!-- Description -->
         <div class="text-h5 q-pt-md">{{ $t('stream.description') }}</div>
         <div class="q-pt-md">{{ videoMetadata.description }}</div>
       </q-scroll-area>
@@ -34,7 +37,6 @@ This component realizes the streaming page in which a user can watch a video. Un
 </template>
 
 <script setup lang="ts">
-
 import { computed, inject, onMounted, Ref, ref } from 'vue';
 import { VideoMetadataDTO } from 'src/dtos/VideoMetadataDTO';
 import { useRoute } from 'vue-router';
@@ -50,12 +52,15 @@ const dateService = inject(dateServiceInjectionKey) as IDateService;
 
 // Variables
 const videoMetadata: Ref<VideoMetadataDTO | null> = ref(null);
-const videoStreamURL = computed(() =>
+const videoStreamURL = computed(() =>  // The computed property returns the URL to streaming endpoint for the video.
   videoMetadata.value!.id
     ? streamApi.defaults.baseURL + '/video/stream/' + videoMetadata.value!.id
     : ''
 );
 
+/**
+ * If the page gets loaded, the video metadata is requested from the server.
+ */
 onMounted(async () => {
   const videoId: string | null = route.query.id as string;
   if (!videoId)
