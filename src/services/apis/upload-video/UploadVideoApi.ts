@@ -25,6 +25,7 @@ export class UploadVideoApi implements IUploadVideoApi {
     formData.append('description', uploadVideoDTO.description);
     formData.append('video', uploadVideoDTO.video!);
     formData.append('cover', uploadVideoDTO.cover!);
+    const totalSize = uploadVideoDTO.getSize();
 
     try {
       // Send the request to the server
@@ -35,7 +36,8 @@ export class UploadVideoApi implements IUploadVideoApi {
 
         // Callback function to track the upload progress
         onUploadProgress: (progressEvent: AxiosProgressEvent) => {
-          this.uploadProgress = Math.round((progressEvent.loaded * 100) / progressEvent.total!);
+          // Calculate the upload progress in percentage
+          this.uploadProgress = Math.round(progressEvent.loaded * 100 / totalSize);
 
           if(this.uploadProgress < 100) {
             // Show the upload progress
@@ -79,7 +81,8 @@ export class UploadVideoApi implements IUploadVideoApi {
     }
 
     // Reset the upload progress and hide the loading message
-    this.uploadProgress = 0;
-    this.q.loading.hide();
+    setTimeout(() => {
+      this.q.loading.hide();
+    }, 500);
   }
 }
